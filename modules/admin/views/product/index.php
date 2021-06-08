@@ -31,6 +31,13 @@ $this->params['breadcrumbs'][] = $this->title;
             'title',
             'gender',
             'brand',
+            [
+                'format' => 'html',
+                'label' => 'Image',
+                'value' => function($data){
+                    return Html::img($data->showImage(), ['width' => 200]);
+                }
+            ],
             //'category',
             //'hidden',
             //'new',
