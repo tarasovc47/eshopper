@@ -18,7 +18,7 @@ class ProductSearch extends Product
     {
         return [
             [['id', 'cost', 'hidden', 'new', 'sale'], 'integer'],
-            [['title', 'gender', 'brand', 'category'], 'safe'],
+            [['title', 'gender', 'brand_id', 'category_id'], 'safe'],
         ];
     }
 
@@ -67,8 +67,8 @@ class ProductSearch extends Product
 
         $query->andFilterWhere(['like', 'title', $this->title])
             ->andFilterWhere(['like', 'gender', $this->gender])
-            ->andFilterWhere(['like', 'brand', $this->brand])
-            ->andFilterWhere(['like', 'category', $this->category]);
+            ->andFilterWhere(['like', 'brand_id', $this->brand_id])
+            ->andFilterWhere(['like', 'category_id', $this->category_id]);
 
         return $dataProvider;
     }

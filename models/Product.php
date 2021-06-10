@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use app\models\Category;
 
 /**
  * This is the model class for table "products".
@@ -51,8 +52,8 @@ class Product extends \yii\db\ActiveRecord
             'cost' => 'Cost',
             'title' => 'Title',
             'gender' => 'Gender',
-            'brand' => 'Brand',
-            'category' => 'Category',
+            'brand_id' => 'Brand',
+            'category_id' => 'Category',
             'hidden' => 'Hidden',
             'new' => 'New',
             'sale' => 'Sale',
@@ -89,5 +90,21 @@ class Product extends \yii\db\ActiveRecord
     public function showImage()
     {
         return ($this->image) ? '/uploads/' . $this->image : '/images/no-image.png';
+    }
+
+    public function getCategory()
+    {
+        return $this->hasOne(Category::class, ['id' => 'category_id']);
+    }
+
+    public function saveCategory($category_id)
+    {
+        $category = Category::findOne($category_id);
+        if ($category != null)
+        {
+            $this->link('category', $category);
+            return true;
+        }
+
     }
 }

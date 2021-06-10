@@ -30,7 +30,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'cost',
             'title',
             'gender',
-            'brand',
+            'brand_id',
             [
                 'format' => 'html',
                 'label' => 'Image',

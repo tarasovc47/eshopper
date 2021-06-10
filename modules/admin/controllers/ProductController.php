@@ -2,10 +2,12 @@
 
 namespace app\modules\admin\controllers;
 
+use app\models\Category;
 use Yii;
 use app\models\Product;
 use app\models\ProductSearch;
 use yii\base\Model;
+use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -142,5 +144,26 @@ class ProductController extends Controller
         }
 
         return $this->render('image', ['model'=>$model]);
+    }
+
+    public function actionSetCategory($id)
+    {
+        $product = $this->findModel($id);
+        $selectedCategory = $product->category->id;
+        $categories = ArrayHelper::map(Category::find()->all(), 'id', 'title');
+
+        if (Yii::$app->request->isPost) {
+            $category = Yii::$app->request->post('category');
+            if ($product->saveCategory($category))
+            {
+                return $this->redirect(['view', 'id'=>$product->id]);
+            }
+        }
+
+        return $this->render('category', [
+            'product' => $product,
+            'selectedCategory' => $selectedCategory,
+            'categories' => $categories,
+        ]);
     }
 }

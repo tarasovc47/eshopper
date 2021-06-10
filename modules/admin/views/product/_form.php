@@ -18,9 +18,9 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'gender')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'brand')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'brand_id')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'category')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'category_id')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'hidden')->textInput() ?>
 

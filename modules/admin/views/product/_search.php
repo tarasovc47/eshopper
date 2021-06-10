@@ -23,7 +23,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'gender') ?>
 
-    <?= $form->field($model, 'brand') ?>
+    <?= $form->field($model, 'brand_id') ?>
 
     <?php // echo $form->field($model, 'category') ?>
 
