@@ -2,12 +2,15 @@
 
 namespace app\modules\admin\controllers;
 
+use app\models\ImageUpload;
 use Yii;
 use app\models\Brand;
 use app\models\BrandSearch;
+use yii\base\BaseObject;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
 
 /**
  * BrandController implements the CRUD actions for Brand model.
@@ -123,5 +126,22 @@ class BrandController extends Controller
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
+    public function actionSetImage($id)
+    {
+        $model = new ImageUpload;
+
+        if (Yii::$app->request->isPost)
+        {
+            $brand = $this->findModel($id);
+            $file = UploadedFile::getInstance($model, 'image');
+            if ($brand->saveImage($model->uploadFile($file, $brand->image)))
+            {
+                $this->redirect(['view', 'id' => $brand->id]);
+            }
+        }
+
+        return $this->render('../add_image/image', ['model'=>$model]);
     }
 }

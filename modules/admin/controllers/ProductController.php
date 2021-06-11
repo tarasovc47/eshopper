@@ -144,7 +144,7 @@ class ProductController extends Controller
             }
         }
 
-        return $this->render('image', ['model'=>$model]);
+        return $this->render('../add_image/image', ['model'=>$model]);
     }
 
     public function actionSetCategory($id)

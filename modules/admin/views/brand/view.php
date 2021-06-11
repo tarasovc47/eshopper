@@ -17,6 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <p>
         <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Добавить лого', ['set-image', 'id' => $model->id], ['class' => 'btn btn-default']) ?>
         <?= Html::a('Delete', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
@@ -31,6 +32,13 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             'id',
             'title',
+            [
+                'format' => 'html',
+                'label' => 'Image',
+                'value' => function($data){
+                    return Html::img($data->showImage(), ['width' => 200]);
+                }
+            ],
         ],
     ]) ?>
 
