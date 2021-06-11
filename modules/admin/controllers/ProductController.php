@@ -2,6 +2,7 @@
 
 namespace app\modules\admin\controllers;
 
+use app\models\Brand;
 use app\models\Category;
 use Yii;
 use app\models\Product;
@@ -164,6 +165,27 @@ class ProductController extends Controller
             'product' => $product,
             'selectedCategory' => $selectedCategory,
             'categories' => $categories,
+        ]);
+    }
+
+    public function actionSetBrand($id)
+    {
+        $product = $this->findModel($id);
+        $selectedBrand = $product->brand->id;
+        $brands = ArrayHelper::map(Brand::find()->all(), 'id', 'title');
+
+        if (Yii::$app->request->isPost) {
+            $brand = Yii::$app->request->post('brand');
+            if ($product->saveBrand($brand))
+            {
+                return $this->redirect(['view', 'id'=>$product->id]);
+            }
+        }
+
+        return $this->render('brand', [
+            'product' => $product,
+            'selectedBrand' => $selectedBrand,
+            'brands' => $brands,
         ]);
     }
 }

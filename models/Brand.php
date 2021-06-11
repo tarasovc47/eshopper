@@ -41,4 +41,9 @@ class Brand extends \yii\db\ActiveRecord
             'title' => 'Title',
         ];
     }
+
+    public function getProducts()
+    {
+        return $this->hasMany(Product::class, ['brand_id' => 'id']);
+    }
 }

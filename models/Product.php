@@ -2,8 +2,8 @@
 
 namespace app\models;
 
-use Yii;
 use app\models\Category;
+use Yii;
 
 /**
  * This is the model class for table "products".
@@ -38,7 +38,7 @@ class Product extends \yii\db\ActiveRecord
         return [
             [['cost', 'title', 'gender'], 'required'],
             [['cost', 'hidden', 'new', 'sale'], 'integer'],
-            [['title', 'gender', 'brand', 'category'], 'string', 'max' => 255],
+            [['title', 'gender', 'brand_id', 'category_id'], 'string', 'max' => 255],
         ];
     }
 
@@ -105,6 +105,20 @@ class Product extends \yii\db\ActiveRecord
             $this->link('category', $category);
             return true;
         }
+    }
 
+    public function getBrand()
+    {
+        return $this->hasOne(Brand::class, ['id' => 'brand_id']);
+    }
+
+    public function saveBrand($brand_id)
+    {
+        $brand = Brand::findOne($brand_id);
+        if ($brand != null)
+        {
+            $this->link('brand', $brand);
+            return true;
+        }
     }
 }
