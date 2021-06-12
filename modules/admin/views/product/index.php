@@ -1,5 +1,6 @@
 <?php
 
+use app\models\Category;
 use yii\helpers\Html;
 use yii\grid\GridView;
 
@@ -30,7 +31,8 @@ $this->params['breadcrumbs'][] = $this->title;
             'cost',
             'title',
             'gender',
-            'brand_id',
+            'brand_id' => 'brand.title',
+            'category_id' => 'category.title',
             [
                 'format' => 'html',
                 'label' => 'Image',
@@ -38,7 +40,13 @@ $this->params['breadcrumbs'][] = $this->title;
                     return Html::img($data->showImage(), ['width' => 200]);
                 }
             ],
-            //'category',
+            [
+                'format' => 'html',
+                'label' => 'Новинка',
+                'value' => function($data){
+                    return $new = ($data['new'] == '0') ? 'Нет' :  'Да';
+                }
+            ],
             //'hidden',
             //'new',
             //'sale',
