@@ -69,4 +69,11 @@ class Brand extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Product::class, ['brand_id' => 'id']);
     }
+
+    public static function getAll()
+    {
+        $query = Brand::find();
+        $brands = $query->all();
+        return $brands;
+    }
 }
