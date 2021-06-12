@@ -46,4 +46,9 @@ class Category extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Product::class, ['category_id' => 'id']);
     }
+
+    public static function getAll()
+    {
+        return Category::find()->all();
+    }
 }

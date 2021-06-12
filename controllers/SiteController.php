@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use app\models\Brand;
+use app\models\Category;
 use app\models\Product;
 use Yii;
 use yii\filters\AccessControl;
@@ -64,14 +65,16 @@ class SiteController extends Controller
     public function actionIndex()
     {
         $brands = Brand::getAll();
-        $products = Product::find()->all();
+        $products = Product::find()->where(['hidden' => '0'])->all();
         $products_min = Product::find()->min('cost');
         $products_max = Product::find()->max('cost');
+        $categories = Category::getAll();
         return $this->render('index', [
             'brands' => $brands,
             'items' => $products,
             'products_cost_min' => $products_min,
             'products_cost_max' => $products_max,
+            'categories' => $categories,
         ]);
     }
 

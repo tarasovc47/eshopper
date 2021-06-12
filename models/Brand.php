@@ -72,8 +72,6 @@ class Brand extends \yii\db\ActiveRecord
 
     public static function getAll()
     {
-        $query = Brand::find();
-        $brands = $query->all();
-        return $brands;
+        return Brand::find()->all();
     }
 }

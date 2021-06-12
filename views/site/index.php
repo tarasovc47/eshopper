@@ -1,3 +1,10 @@
+<?php
+
+use app\models\Product;
+use yii\helpers\ArrayHelper;
+use yii\helpers\Url;
+?>
+
 <section id="slider"><!--slider-->
     <div class="container">
         <div class="row">
@@ -70,28 +77,37 @@
                 <div class="left-sidebar">
                     <h2>Category</h2>
                     <div class="panel-group category-products" id="accordian"><!--category-productsr-->
-                        <div class="panel panel-default">
+                        <?php foreach ($categories as $category): ?>
+                            <div class="panel panel-default">
                             <div class="panel-heading">
                                 <h4 class="panel-title">
-                                    <a data-toggle="collapse" data-parent="#accordian" href="#sportswear">
+                                    <a data-toggle="collapse" data-parent="#accordian" href="#<?= $category->id; ?>">
                                         <span class="badge pull-right"><i class="fa fa-plus"></i></span>
-                                        Sportswear
+                                        <?= $category->title; ?>
                                     </a>
                                 </h4>
                             </div>
-                            <div id="sportswear" class="panel-collapse collapse">
+                            <div id="<?= $category->id  ?>" class="panel-collapse collapse">
                                 <div class="panel-body">
                                     <ul>
-                                        <li><a href="#">Nike </a></li>
-                                        <li><a href="#">Under Armour </a></li>
+                                        <li><a href="#">
+                                                <?php
+                                                    $item = Product::find()->where(['category_id' => $category->id])->all();
+                                                    $result = ArrayHelper::map($item, 'id','brand_id');
+                                                    $value = ArrayHelper::getValue($result, '1');
+                                                    var_dump($value);
+                                                ?>
+                                            </a></li>
+                                        <!--<li><a href="#">Under Armour </a></li>
                                         <li><a href="#">Adidas </a></li>
                                         <li><a href="#">Puma</a></li>
-                                        <li><a href="#">ASICS </a></li>
+                                        <li><a href="#">ASICS </a></li>-->
                                     </ul>
                                 </div>
                             </div>
                         </div>
-                        <div class="panel panel-default">
+                        <?php endforeach; ?>
+                        <!--<div class="panel panel-default">
                             <div class="panel-heading">
                                 <h4 class="panel-title">
                                     <a data-toggle="collapse" data-parent="#accordian" href="#mens">
@@ -173,7 +189,7 @@
                             <div class="panel-heading">
                                 <h4 class="panel-title"><a href="#">Shoes</a></h4>
                             </div>
-                        </div>
+                        </div>-->
                     </div><!--/category-products-->
 
                     <div class="brands_products"><!--brands_products-->
