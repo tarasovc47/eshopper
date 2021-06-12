@@ -30,9 +30,24 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             'cost',
             'title',
-            'gender',
-            'brand_id' => 'brand.title',
-            'category_id' => 'category.title',
+            'gender' =>
+                [
+                    'format' => 'text',
+                    'label' => 'Пол',
+                    'value' => function($data){
+                        return $data['gender'] == 'М' ? 'Мужское' : 'Женское';
+                    },
+                ],
+            'brand_id' =>
+                [
+                    'value' => 'brand.title',
+                    'label' => 'Бренд',
+                ],
+            'category_id' =>
+                [
+                    'value' => 'category.title',
+                    'label' => 'Категория',
+                ],
             [
                 'format' => 'html',
                 'label' => 'Image',
@@ -41,10 +56,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 }
             ],
             [
-                'format' => 'html',
+                'format' => 'text',
                 'label' => 'Новинка',
                 'value' => function($data){
-                    return $new = ($data['new'] == '0') ? 'Нет' :  'Да';
+                    return ($data['new'] == '0') ? 'Нет' :  'Да';
                 }
             ],
             //'hidden',
