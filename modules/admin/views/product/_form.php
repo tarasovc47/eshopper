@@ -1,5 +1,8 @@
 <?php
 
+use app\models\Brand;
+use app\models\Category;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
@@ -16,17 +19,29 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'gender')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'gender')->dropDownList([
+        'М' => 'Мужское',
+        'Ж' => 'Женское',
+    ]) ?>
 
-    <?= $form->field($model, 'brand_id')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'brand_id')->dropDownList(ArrayHelper::map(Brand::find()->all(), 'id', 'title')) ?>
 
-    <?= $form->field($model, 'category_id')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'category_id')->dropDownList(ArrayHelper::map(Category::find()->all(), 'id', 'title')) ?>
 
-    <?= $form->field($model, 'hidden')->textInput() ?>
+    <?= $form->field($model, 'hidden')->dropDownList([
+        '1' => 'Скрыт',
+        '0' => 'В продаже',
+    ]) ?>
 
-    <?= $form->field($model, 'new')->textInput() ?>
+    <?= $form->field($model, 'new')->dropDownList([
+        '1' => 'Новинка',
+        '0' => 'Не новинка',
+    ]) ?>
 
-    <?= $form->field($model, 'sale')->textInput() ?>
+    <?= $form->field($model, 'sale')->dropDownList([
+        '1' => 'участвует в распродаже',
+        '0' => 'не участвует в распродаже',
+    ]) ?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
