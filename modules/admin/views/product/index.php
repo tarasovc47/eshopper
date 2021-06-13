@@ -14,10 +14,7 @@ use yii\grid\GridView;
 
 $this->title = 'Products';
 $this->params['breadcrumbs'][] = $this->title;
-const MALE = 'Мужское';
-const FEMALE = 'Женское';
-const NEW_PRODUCT = 'Новинка';
-const NOT_NEW_PRODUCT = 'Не новинка';
+
 ?>
 <div class="product-index">
 
@@ -46,7 +43,7 @@ const NOT_NEW_PRODUCT = 'Не новинка';
                         return $data['gender'] == 'М' ? 'Мужское' : 'Женское';
                     },
                     'attribute' => 'gender',
-                    'filter' => array('М' => MALE, 'Ж' => FEMALE)
+                    'filter' => array('М' => ProductSearch::MALE, 'Ж' => ProductSearch::FEMALE)
                 ],
             'brand_id' =>
                 [
@@ -76,7 +73,7 @@ const NOT_NEW_PRODUCT = 'Не новинка';
                     return ($data['new'] == '0') ? 'не новинка' :  'новинка';
                 },
                 'attribute' => 'new',
-                'filter' => array('0' => NOT_NEW_PRODUCT, '1' => NEW_PRODUCT)
+                'filter' => array('0' => ProductSearch::NOT_NEW_PRODUCT, '1' => ProductSearch::NEW_PRODUCT)
             ],
             [
                 'format' => 'text',

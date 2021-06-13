@@ -11,6 +11,10 @@ use app\models\Product;
  */
 class ProductSearch extends Product
 {
+    const MALE = 'Мужское';
+    const FEMALE = 'Женское';
+    const NEW_PRODUCT = 'Новинка';
+    const NOT_NEW_PRODUCT = 'Не новинка';
     /**
      * {@inheritdoc}
      */
