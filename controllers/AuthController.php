@@ -29,7 +29,7 @@ class AuthController extends Controller implements IdentityInterface
         }
 
         $model->password = '';
-        return $this->render('login', [
+        return $this->render('/auth/login', [
             'model' => $model,
         ]);
     }
@@ -48,15 +48,8 @@ class AuthController extends Controller implements IdentityInterface
     public function actionTest()
     {
         $user = User::findOne(1);
-        Yii::$app->user->login($user);
-        if (Yii::$app->user->isGuest)
-        {
-            echo 'guest';
-        }
-        else
-        {
-            echo 'user';
-        }
+        Yii::$app->user->logout($user);
+        var_dump(Yii::$app->user->isGuest);
     }
 
     /**
