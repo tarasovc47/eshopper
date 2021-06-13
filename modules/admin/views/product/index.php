@@ -1,6 +1,10 @@
 <?php
 
+use app\models\BrandSearch;
 use app\models\Category;
+use app\models\CategorySearch;
+use app\models\ProductSearch;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\grid\GridView;
 
@@ -10,6 +14,10 @@ use yii\grid\GridView;
 
 $this->title = 'Products';
 $this->params['breadcrumbs'][] = $this->title;
+const MALE = 'Мужское';
+const FEMALE = 'Женское';
+const NEW_PRODUCT = 'Новинка';
+const NOT_NEW_PRODUCT = 'Не новинка';
 ?>
 <div class="product-index">
 
@@ -37,20 +45,26 @@ $this->params['breadcrumbs'][] = $this->title;
                     'value' => function($data){
                         return $data['gender'] == 'М' ? 'Мужское' : 'Женское';
                     },
+                    'attribute' => 'gender',
+                    'filter' => array('М' => MALE, 'Ж' => FEMALE)
                 ],
             'brand_id' =>
                 [
                     'value' => 'brand.title',
                     'label' => 'Бренд',
+                    'attribute' => 'brand_id',
+                    'filter' => ArrayHelper::map(BrandSearch::find()->all(), 'id', 'title'),
                 ],
             'category_id' =>
                 [
                     'value' => 'category.title',
                     'label' => 'Категория',
+                    'attribute' => 'category_id',
+                    'filter' => ArrayHelper::map(CategorySearch::find()->all(), 'id', 'title'),
                 ],
             [
                 'format' => 'html',
-                'label' => 'Image',
+                'label' => 'Фото',
                 'value' => function($data){
                     return Html::img($data->showImage(), ['width' => 200]);
                 }
@@ -59,12 +73,29 @@ $this->params['breadcrumbs'][] = $this->title;
                 'format' => 'text',
                 'label' => 'Новинка',
                 'value' => function($data){
-                    return ($data['new'] == '0') ? 'Нет' :  'Да';
-                }
+                    return ($data['new'] == '0') ? 'не новинка' :  'новинка';
+                },
+                'attribute' => 'new',
+                'filter' => array('0' => NOT_NEW_PRODUCT, '1' => NEW_PRODUCT)
             ],
-            //'hidden',
-            //'new',
-            //'sale',
+            [
+                'format' => 'text',
+                'label' => 'Снят с продажи',
+                'value' => function($data){
+                    return ($data['hidden'] == '0') ? 'в продаже' :  'снят';
+                },
+                'attribute' => 'hidden',
+                'filter' => array('0' => 'в продаже', '1' => 'снят с продажи')
+            ],
+            [
+                'format' => 'text',
+                'label' => 'Распродажа',
+                'value' => function($data){
+                    return ($data['sale'] == '0') ? 'не участвует' :  'распродажа';
+                },
+                'attribute' => 'sale',
+                'filter' => array('0' => 'не участвует', '1' => 'распродажа')
+            ],
 
             ['class' => 'yii\grid\ActionColumn'],
         ],
