@@ -22,7 +22,6 @@ class SignupForm extends  Model
             [['email'],'email'],
             [['email'], 'unique', 'targetClass'=>'app\models\User','targetAttribute'=>'email'],
             [['login'], 'unique', 'targetClass'=>'app\models\User','targetAttribute'=>'login'],
-            [['phone'], 'unique', 'targetClass'=>'app\models\User','targetAttribute'=>'phone'],
         ];
     }
 

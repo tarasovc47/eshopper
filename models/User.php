@@ -50,15 +50,15 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
     {
         return [
             'id' => 'ID',
-            'name' => 'Имя',
-            'surname' => 'Фамилия',
-            'gender' => 'Пол',
-            'login' => 'Логин',
-            'email' => 'E-Mail',
-            'password' => 'Пароль',
-            'phone' => 'Телефон',
-            'confirm' => 'Подтверждён',
-            'isAdmin' => 'Администратор',
+            'name' => 'Name',
+            'surname' => 'Surname',
+            'gender' => 'Gender',
+            'login' => 'Login',
+            'email' => 'Email',
+            'password' => 'Password',
+            'phone' => 'Phone',
+            'confirm' => 'Confirm',
+            'isAdmin' => 'Is Admin',
         ];
     }
 
@@ -97,14 +97,18 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
         // TODO: Implement validateAuthKey() method.
     }
 
-    public static function findByUsername($username)
+    public static function findByUsername($username,$email)
     {
-        return User::find()->where(['login' => $username])->one();
+        return User::find()->where(['login' => $username])->andWhere(['email' => $email])->one();
     }
 
     public function validatePassword($password)
     {
-        return $this->password == $password;
+        return ($this->password == $password) ? true : false;
+    }
+    public function validateEmail($email)
+    {
+        return ($this->email == $email) ? true : false;
     }
 
     public function create()
