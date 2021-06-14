@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use app\models\LoginForm;
+use app\models\SignupForm;
 use app\models\User;
 use Yii;
 use yii\base\BaseObject;
@@ -45,11 +46,20 @@ class AuthController extends Controller implements IdentityInterface
         return $this->goHome();
     }
 
-    public function actionTest()
+    public function actionSignup()
     {
-        $user = User::findOne(1);
-        Yii::$app->user->logout($user);
-        var_dump(Yii::$app->user->isGuest);
+        $model = new SignupForm();
+
+        if (Yii::$app->request->isPost)
+        {
+            $model->load(Yii::$app->request->post());
+            if ($model->signup())
+            {
+                return $this->redirect(['auth/login']);
+            }
+        }
+
+        return $this->render('signup', ['model' => $model]);
     }
 
     /**

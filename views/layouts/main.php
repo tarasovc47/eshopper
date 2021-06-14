@@ -95,7 +95,14 @@ PublicAsset::register($this);
                             <li><a href="#"><i class="fa fa-star"></i> Wishlist</a></li>
                             <li><a href="checkout.html"><i class="fa fa-crosshairs"></i> Checkout</a></li>
                             <li><a href="cart.html"><i class="fa fa-shopping-cart"></i> Cart</a></li>
-                            <li><a href="<?= URl::toRoute(['auth/login']) ?>"><i class="fa fa-lock"></i> Login</a></li>
+                            <!--<li><a href="<?/*= URl::toRoute(['auth/login']) */?>"><i class="fa fa-lock"></i> Login</a></li>-->
+                            <?php
+                            if (Yii::$app->user->isGuest):?>
+                                <li><a href="<?= URl::toRoute(['auth/login']) ?>">Вход</a></li>
+                                <li><a href="<?= URl::toRoute(['auth/signup']) ?>">Регистрация</a></li>
+                            <?php else: ?>
+                                <li><a href="<?= URl::toRoute(['/auth/logout']) ?>">Выход (<?= Yii::$app->user->identity->name ?>)</a></li>
+                            <?php endif; ?>
                         </ul>
                     </div>
                 </div>

@@ -97,13 +97,22 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
         // TODO: Implement validateAuthKey() method.
     }
 
-    public static function findByUsername($username)
+    public static function findByUsername($username,$email)
     {
-        return User::find()->where(['login' => $username])->one();
+        return User::find()->where(['login' => $username])->andWhere(['email' => $email])->one();
     }
 
     public function validatePassword($password)
     {
         return ($this->password == $password) ? true : false;
+    }
+    public function validateEmail($email)
+    {
+        return ($this->email == $email) ? true : false;
+    }
+
+    public function create()
+    {
+        return $this->save(false);
     }
 }
