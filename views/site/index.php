@@ -229,13 +229,13 @@ use yii\helpers\Url;
                                     <img src="<?= $item->showImage() ?>" alt="" />
                                     <h2><?= $item->cost ?> $</h2>
                                     <p><?= $item->title ?></p>
-                                    <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                    <a href="<?= Url::to(['cart/add', 'id' => $item->id]) ?>"  data-id="<?= $item->id ?>" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
                                 </div>
                                 <div class="product-overlay">
                                     <div class="overlay-content">
                                         <h2><?= $item->cost ?> $</h2>
                                         <p><?= $item->title ?></p>
-                                        <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                        <a href="<?= Url::to(['cart/add', 'id' => $item->id]) ?>" data-id="<?= $item->id ?>" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
                                     </div>
                                 </div>
                             </div>
@@ -270,7 +270,7 @@ use yii\helpers\Url;
                                             <img src="images/home/gallery1.jpg" alt="" />
                                             <h2>$56</h2>
                                             <p>Easy Polo Black Edition</p>
-                                            <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                            <a href="<?= Url::to(['cart/add', 'id' => $item->id]) ?>" id="item<?= $item->id ?>" data-id="<?= $item->id ?>" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
                                         </div>
 
                                     </div>
