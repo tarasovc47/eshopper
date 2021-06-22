@@ -63,7 +63,7 @@ PublicAsset::register($this);
             <div class="row">
                 <div class="col-sm-4">
                     <div class="logo pull-left">
-                        <a href="/"><img src="public/images/home/logo.png" alt="" /></a>
+                        <a href="/"><?= Html::img('@web/public/images/home/logo.png') ?></a>
                     </div>
                     <div class="btn-group pull-right">
                         <div class="btn-group">
@@ -172,7 +172,7 @@ PublicAsset::register($this);
                         <div class="video-gallery text-center">
                             <a href="#">
                                 <div class="iframe-img">
-                                    <img src="public/images/home/iframe1.png" alt="" />
+                                    <?= Html::img('@web/public/images/home/iframe1.png') ?>
                                 </div>
                                 <div class="overlay-icon">
                                     <i class="fa fa-play-circle-o"></i>
@@ -187,7 +187,7 @@ PublicAsset::register($this);
                         <div class="video-gallery text-center">
                             <a href="#">
                                 <div class="iframe-img">
-                                    <img src="public/images/home/iframe2.png" alt="" />
+                                    <?= Html::img('@web/public/images/home/iframe2.png') ?>
                                 </div>
                                 <div class="overlay-icon">
                                     <i class="fa fa-play-circle-o"></i>
@@ -202,7 +202,7 @@ PublicAsset::register($this);
                         <div class="video-gallery text-center">
                             <a href="#">
                                 <div class="iframe-img">
-                                    <img src="public/images/home/iframe3.png" alt="" />
+                                    <?= Html::img('@web/public/images/home/iframe3.png') ?>
                                 </div>
                                 <div class="overlay-icon">
                                     <i class="fa fa-play-circle-o"></i>
@@ -217,7 +217,7 @@ PublicAsset::register($this);
                         <div class="video-gallery text-center">
                             <a href="#">
                                 <div class="iframe-img">
-                                    <img src="public/images/home/iframe4.png" alt="" />
+                                    <?= Html::img('@web/public/images/home/iframe4.png') ?>
                                 </div>
                                 <div class="overlay-icon">
                                     <i class="fa fa-play-circle-o"></i>
@@ -230,7 +230,7 @@ PublicAsset::register($this);
                 </div>
                 <div class="col-sm-3">
                     <div class="address">
-                        <img src="public/images/home/map.png" alt="" />
+                        <?= Html::img('@web/public/images/home/map.png') ?>
                         <p>505 S Atlantic Ave Virginia Beach, VA(Virginia)</p>
                     </div>
                 </div>

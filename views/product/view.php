@@ -204,7 +204,7 @@ Womens
                                 <label>Количество:</label>
                                 <input type="text" id="qty" />
                                 <a class="btn cart add-to-cart" data-id="<?= $product->id ?>">
-                                    <i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                    <i class="fa fa-shopping-cart"></i>Купить</a>
                             </span>
                             <p><b>Категория: </b><a href="<?= Url::to(['category/view', 'id' => $product->category->id]) ?>"><?= $product->category->title ?></a></p>
                         </div><!--/product-information-->
