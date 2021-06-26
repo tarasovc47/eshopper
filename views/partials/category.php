@@ -1,10 +1,10 @@
 <?php
-use app\models\Product;
-use yii\helpers\ArrayHelper;
+
+use yii\helpers\Url;
 
 ?>
 
-<h2>Category</h2>
+<h2>Категории</h2>
 <div class="panel-group category-products" id="accordian"><!--category-productsr-->
     <?php foreach ($categories as $category): ?>
         <div class="panel panel-default">
@@ -19,14 +19,13 @@ use yii\helpers\ArrayHelper;
             <div id="<?= $category->id  ?>" class="panel-collapse collapse">
                 <div class="panel-body">
                     <ul>
-                        <li><a href="#">
-                                <?php
-                                $item = Product::find()->where(['category_id' => $category->id])->all();
-                                $result = ArrayHelper::map($item, 'id','brand_id');
-                                $value = ArrayHelper::getValue($result, '1');
-                                var_dump($value);
-                                ?>
-                            </a></li>
+                        <?php foreach ($brands as $brand):?>
+                        <li>
+                            <a href="<?= Url::to(['category/view', 'id' => $brand->id])  ?>">
+
+                            </a>
+                        </li>
+                        <?php endforeach; ?>
                         <!--<li><a href="#">Under Armour </a></li>
                         <li><a href="#">Adidas </a></li>
                         <li><a href="#">Puma</a></li>

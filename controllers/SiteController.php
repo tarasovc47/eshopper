@@ -71,7 +71,7 @@ class SiteController extends Controller
         $categories = Category::getAll();
         return $this->render('index', [
             'brands' => $brands,
-            'items' => $products,
+            'products' => $products,
             'products_cost_min' => $products_min,
             'products_cost_max' => $products_max,
             'categories' => $categories,

@@ -77,10 +77,9 @@ use yii\helpers\Url;
                 <div class="left-sidebar">
                     <?= $this->render('../partials/category', [
                         'categories' => $categories,
+                        'brands' => $brands,
                     ])
-
                     ?>
-
                     <div class="brands_products"><!--brands_products-->
                         <h2>Brands</h2>
                         <div class="brands-name">
@@ -110,15 +109,15 @@ use yii\helpers\Url;
             <div class="col-sm-9 padding-right">
                 <div class="features_items"><!--features_items-->
                     <h2 class="title text-center">Features Items</h2>
-                    <?php foreach ($items as $item): ?>
+                    <?php foreach ($products as $product): ?>
                         <div class="col-sm-4">
                         <div class="product-image-wrapper">
                             <div class="single-products">
                                 <div class="productinfo text-center">
-                                    <img src="<?= $item->showImage() ?>" alt="" />
-                                    <h2><?= $item->cost ?> $</h2>
-                                    <p><a href="<?= Url::to(['product/view', 'id'=>$item->id]) ?>"> <?= $item->title ?></a></p>
-                                    <a href="<?= Url::to(['cart/add', 'id' => $item->id]) ?>"  data-id="<?= $item->id ?>" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Купить</a>
+                                    <img src="<?= $product->showImage() ?>" alt="" />
+                                    <h2><?= $product->cost ?> $</h2>
+                                    <p><a href="<?= Url::to(['product/view', 'id'=>$product->id]) ?>"> <?= $product->title ?></a></p>
+                                    <a href="<?= Url::to(['cart/add', 'id' => $product->id]) ?>"  data-id="<?= $product->id ?>" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Купить</a>
                                 </div>
                             </div>
                             <div class="choose">
@@ -152,7 +151,7 @@ use yii\helpers\Url;
                                             <img src="images/home/gallery1.jpg" alt="" />
                                             <h2>$56</h2>
                                             <p>Easy Polo Black Edition</p>
-                                            <a href="<?= Url::to(['cart/add', 'id' => $item->id]) ?>" id="item<?= $item->id ?>" data-id="<?= $item->id ?>" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                            <a href="<?= Url::to(['cart/add', 'id' => $product->id]) ?>" id="item<?= $product->id ?>" data-id="<?= $product->id ?>" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
                                         </div>
 
                                     </div>
