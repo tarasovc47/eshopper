@@ -12,10 +12,7 @@ use yii\helpers\Url;
             <?php
             foreach ($brands as $brand): ?>
                 <li><a href="<?= Url::to(['brands/view', 'id' => $brand->id]) ?>">
-                    <span class="pull-right">(
-                        <?php
-                        Product::brandCount($brand->id);
-                        ?> )
+                    <span class="pull-right">( <?php Product::brandCount($brand->id); ?> )
                     </span><span class="pull-right"></span><?= $brand->title ?></a></li>
             <?php endforeach;?>
         </ul>
