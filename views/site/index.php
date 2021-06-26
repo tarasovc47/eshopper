@@ -77,19 +77,13 @@ use yii\helpers\Url;
                 <div class="left-sidebar">
                     <?= $this->render('../partials/category', [
                         'categories' => $categories,
+                    ])
+                    ?>
+                    <!---->
+                    <?= $this->render('../partials/brand', [
                         'brands' => $brands,
                     ])
                     ?>
-                    <div class="brands_products"><!--brands_products-->
-                        <h2>Brands</h2>
-                        <div class="brands-name">
-                            <ul class="nav nav-pills nav-stacked">
-                                <?php foreach ($brands as $brand): ?>
-                                    <li><a href="#"> <span class="pull-right">(кол-во)</span><span class="pull-right"></span><?= $brand->title ?></a></li>
-                                <?php endforeach;?>
-                            </ul>
-                        </div>
-                    </div><!--/brands_products-->
 
                     <div class="price-range"><!--price-range-->
                         <h2>Price Range</h2>

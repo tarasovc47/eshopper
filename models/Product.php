@@ -122,5 +122,11 @@ class Product extends \yii\db\ActiveRecord
         }
     }
 
-
+    public static function brandCount($id)
+    {
+        $count = Product::find()
+            ->where(['brand_id' => $id])
+            ->count();
+        return $count;
+    }
 }
