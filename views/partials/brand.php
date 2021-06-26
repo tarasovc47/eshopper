@@ -6,7 +6,11 @@ use yii\helpers\Url;
 ?>
 
 <div class="brands_products">
+<<<<<<< HEAD
     <h2>Бренды</h2>
+=======
+    <h2>Brands</h2>
+>>>>>>> fc42bcf9d16c544b745798457a39eb32726f751e
     <div class="brands-name">
         <ul class="nav nav-pills nav-stacked">
             <?php
