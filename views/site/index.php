@@ -95,8 +95,8 @@ use yii\helpers\Url;
             </div>
 
             <div class="col-sm-9 padding-right">
-                <div class="features_items"><!--features_items-->
-                    <h2 class="title text-center">Features Items</h2>
+                <div class="features_items">
+                    <h2 class="title text-center">Товары в наличии</h2>
                     <?php foreach ($products as $product): ?>
                         <div class="col-sm-4">
                         <div class="product-image-wrapper">
@@ -104,7 +104,7 @@ use yii\helpers\Url;
                                 <div class="productinfo text-center">
                                     <img src="<?= $product->showImage() ?>" alt="" />
                                     <h2><?= $product->cost ?> $</h2>
-                                    <p><a href="<?= Url::to(['product/view', 'id'=>$product->id]) ?>"> <?= $product->title ?></a></p>
+                                    <p><a href="<?= Url::to(['product/view', 'id'=>$product->id]) ?>"><?= $product->title ?></a></p>
                                     <a href="<?= Url::to(['cart/add', 'id' => $product->id]) ?>"  data-id="<?= $product->id ?>" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Купить</a>
                                 </div>
                             </div>
@@ -117,8 +117,7 @@ use yii\helpers\Url;
                         </div>
                     </div>
                     <?php endforeach; ?>
-
-                </div><!--features_items-->
+                </div>
 
                 <div class="category-tab"><!--category-tab-->
                     <div class="col-sm-12">
