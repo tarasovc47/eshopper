@@ -3,6 +3,8 @@
 use app\models\Product;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Url;
+use yii\widgets\LinkPager;
+
 ?>
 
 <!--<section id="slider">--><!--slider-->
@@ -116,7 +118,11 @@ use yii\helpers\Url;
                             </div>
                         </div>
                     </div>
-                    <?php endforeach; ?>
+                    <?php endforeach;
+                    echo LinkPager::widget([
+                        'pagination' => $pagination,
+                    ]);
+                    ?>
                 </div>
 
                 <div class="category-tab"><!--category-tab-->

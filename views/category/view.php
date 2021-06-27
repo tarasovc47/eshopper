@@ -3,6 +3,7 @@
 use yii\bootstrap\Modal;
 use yii\helpers\Html;
 use yii\helpers\Url;
+use yii\widgets\LinkPager;
 
 ?>
 <section>
@@ -37,18 +38,18 @@ use yii\helpers\Url;
                     {
                         ?>
                         <div class="col-sm-12">
-                            <a href="/">Вернуться на главную</a>
+                            <a href="/">Здесь товаров нет. Вернуться на главную</a>
                         </div>
                         <?php
                     }
                     else foreach ($products as $product): ?>
-                        <div class="col-sm-3">
+                        <div class="col-sm-4">
                             <div class="product-image-wrapper">
                                 <div class="single-products">
                                     <div class="productinfo text-center">
-                                        <img src="<?= $product->showImage() ?>" alt="" />
+                                        <a href="<?= Url::to(['../product/view', 'id' => $product->id]) ?>"><img src="<?= $product->showImage() ?>" alt="" /></a>
                                         <h2><?= $product->cost ?> $</h2>
-                                        <p><?= $product->title ?></p>
+                                        <p><a href="<?= Url::to(['../product/view', 'id' => $product->id]) ?>"><?= $product->title ?></a></p>
                                         <a href="<?= Url::to(['cart/add', 'id' => $product->id]) ?>"  data-id="<?= $product->id ?>" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Купить</a>
                                     </div>
                                 </div>
@@ -56,6 +57,10 @@ use yii\helpers\Url;
                         </div>
                     <?php endforeach; ?>
                 </div>
+                <?= LinkPager::widget([
+                    'pagination' => $pagination,
+                ]);
+                ?>
             </div>
             <div class="category-tab shop-details-tab"><!--category-tab-->
                 <div class="col-sm-12">

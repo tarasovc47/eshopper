@@ -67,16 +67,21 @@ class SiteController extends Controller
     public function actionIndex()
     {
         $brands = Brand::getAll();
-        $products = Product::find()->where(['hidden' => '0'])->all();
+        $query = Product::find()->where(['hidden' => '0']);
         $products_min = Product::find()->min('cost');
         $products_max = Product::find()->max('cost');
         $categories = Category::getAll();
+        $pagination = new Pagination(['totalCount' => $query->count(), 'pageSize' => 6]);
+        $products = $query->offset($pagination->offset)
+            ->limit($pagination->limit)
+            ->all();
         return $this->render('index', [
             'brands' => $brands,
             'products' => $products,
             'products_cost_min' => $products_min,
             'products_cost_max' => $products_max,
             'categories' => $categories,
+            'pagination' => $pagination,
         ]);
     }
 
@@ -112,8 +117,7 @@ class SiteController extends Controller
     {
         $brands = Brand::getAll();
         $query = Product::find()->where(['category_id' => $id]);
-        $count = $query->count();
-        $pagination = new Pagination(['totalCount' => $count, 'pageSize' => 9]);
+        $pagination = new Pagination(['totalCount' => $query->count(), 'pageSize' => 6]);
         $products = $query->offset($pagination->offset)
             ->limit($pagination->limit)
             ->all();
@@ -123,7 +127,7 @@ class SiteController extends Controller
         $data['products'] = $products;
         $data['pagination'] = $pagination;
         $category = Category::findOne($id);
-        return $this->render('category', [
+        return $this->render('../category/view', [
             'brands' => $brands,
             'products' => $data['products'],
             'pagination' => $data['pagination'],
@@ -131,6 +135,31 @@ class SiteController extends Controller
             'products_cost_max' => $products_max,
             'categories' => $categories,
             'category' => $category,
+        ]);
+    }
+
+    public function actionBrand($id)
+    {
+        $brands = Brand::getAll();
+        $query = Product::find()->where(['brand_id' => $id]);
+        $pagination = new Pagination(['totalCount' => $query->count(), 'pageSize' => 6]);
+        $products = $query->offset($pagination->offset)
+            ->limit($pagination->limit)
+            ->all();
+        $products_min = Product::find()->min('cost');
+        $products_max = Product::find()->max('cost');
+        $categories = Category::getAll();
+        $data['products'] = $products;
+        $data['pagination'] = $pagination;
+        $brand = Brand::findOne($id);
+        return $this->render('../brand/view', [
+            'brands' => $brands,
+            'products' => $data['products'],
+            'pagination' => $data['pagination'],
+            'products_cost_min' => $products_min,
+            'products_cost_max' => $products_max,
+            'categories' => $categories,
+            'brand' => $brand,
         ]);
     }
 }

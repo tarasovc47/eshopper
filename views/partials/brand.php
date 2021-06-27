@@ -11,7 +11,7 @@ use yii\helpers\Url;
         <ul class="nav nav-pills nav-stacked">
             <?php
             foreach ($brands as $brand): ?>
-                <li><a href="<?= Url::to(['brands/view', 'id' => $brand->id]) ?>">
+                <li><a href="<?= Url::to(['site/brand', 'id' => $brand->id]) ?>">
                     <span class="pull-right">( <?php Product::brandCount($brand->id); ?> )
                     </span><span class="pull-right"></span><?= $brand->title ?></a></li>
             <?php endforeach;?>
