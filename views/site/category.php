@@ -31,20 +31,31 @@ use yii\helpers\Url;
             </div>
 
             <div class="col-sm-9 padding-right">
-                <?php foreach ($products as $product): ?>
-                <div class="col-sm-3">
-                    <div class="product-image-wrapper">
-                        <div class="single-products">
-                            <div class="productinfo text-center">
-                                <img src="<?= $product->showImage() ?>" alt="" />
-                                <h2><?= $product->cost ?> $</h2>
-                                <p><?= $product->title ?></p>
-                                <a href="<?= Url::to(['cart/add', 'id' => $product->id]) ?>"  data-id="<?= $product->id ?>" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Купить</a>
+                <div class="features_items">
+                    <h2 class="title text-center">Товары в категории "<?= $category->title  ?>"</h2>
+                    <?php if (empty($products))
+                    {
+                        ?>
+                        <div class="col-sm-12">
+                            <a href="/">Вернуться на главную</a>
+                        </div>
+                        <?php
+                    }
+                    else foreach ($products as $product): ?>
+                        <div class="col-sm-3">
+                            <div class="product-image-wrapper">
+                                <div class="single-products">
+                                    <div class="productinfo text-center">
+                                        <img src="<?= $product->showImage() ?>" alt="" />
+                                        <h2><?= $product->cost ?> $</h2>
+                                        <p><?= $product->title ?></p>
+                                        <a href="<?= Url::to(['cart/add', 'id' => $product->id]) ?>"  data-id="<?= $product->id ?>" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Купить</a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    <?php endforeach; ?>
                 </div>
-                <?php endforeach; ?>
             </div>
             <div class="category-tab shop-details-tab"><!--category-tab-->
                 <div class="col-sm-12">

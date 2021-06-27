@@ -6,6 +6,8 @@ use app\models\Brand;
 use app\models\Category;
 use app\models\Product;
 use Yii;
+use yii\base\BaseObject;
+use yii\data\Pagination;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\Response;
@@ -104,5 +106,31 @@ class SiteController extends Controller
     public function actionAbout()
     {
         return $this->render('about');
+    }
+
+    public function actionCategory($id)
+    {
+        $brands = Brand::getAll();
+        $query = Product::find()->where(['category_id' => $id]);
+        $count = $query->count();
+        $pagination = new Pagination(['totalCount' => $count, 'pageSize' => 9]);
+        $products = $query->offset($pagination->offset)
+            ->limit($pagination->limit)
+            ->all();
+        $products_min = Product::find()->min('cost');
+        $products_max = Product::find()->max('cost');
+        $categories = Category::getAll();
+        $data['products'] = $products;
+        $data['pagination'] = $pagination;
+        $category = Category::findOne($id);
+        return $this->render('category', [
+            'brands' => $brands,
+            'products' => $data['products'],
+            'pagination' => $data['pagination'],
+            'products_cost_min' => $products_min,
+            'products_cost_max' => $products_max,
+            'categories' => $categories,
+            'category' => $category,
+        ]);
     }
 }
