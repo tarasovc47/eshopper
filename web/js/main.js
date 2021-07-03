@@ -11,6 +11,11 @@ function showCart(cart){
     $('#cart-modal').modal();
 }
 
+$(document).ready(function (){
+    $('div .tab-pane:first-child').addClass('active');
+    $('.nav-tabs li:first-child').addClass('active');
+})
+
 function getCart(){
     $.ajax({
         url: '/cart/show',
