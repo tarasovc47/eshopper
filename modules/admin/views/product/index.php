@@ -35,6 +35,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             'cost',
             'title',
+            'detail',
             'gender' =>
                 [
                     'format' => 'text',
@@ -97,6 +98,4 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
-
-
 </div>

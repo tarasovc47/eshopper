@@ -11,6 +11,7 @@ use Yii;
  * @property int $id
  * @property int $cost
  * @property string $title
+ * @property string $detail
  * @property string $gender
  * @property string|null $brand
  * @property string|null $category
@@ -38,7 +39,7 @@ class Product extends \yii\db\ActiveRecord
         return [
             [['cost', 'title', 'gender'], 'required'],
             [['cost', 'hidden', 'new', 'sale'], 'integer'],
-            [['title', 'gender', 'brand_id', 'category_id'], 'string', 'max' => 255],
+            [['title', 'detail', 'gender', 'brand_id', 'category_id'], 'string', 'max' => 255],
         ];
     }
 
@@ -51,6 +52,7 @@ class Product extends \yii\db\ActiveRecord
             'id' => 'ID',
             'cost' => 'Стоимость',
             'title' => 'Описание',
+            'detail' =>'Подробное описание',
             'gender' => 'Пол',
             'brand_id' => 'Бренд',
             'category_id' => 'Категория',

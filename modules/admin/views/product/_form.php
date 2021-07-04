@@ -19,6 +19,8 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 
+    <?= $form->field($model, 'detail')->textInput() ?>
+
     <?= $form->field($model, 'gender')->dropDownList([
         'М' => 'Мужское',
         'Ж' => 'Женское',

@@ -25,6 +25,8 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'brand_id') ?>
 
+    <?= $form->field($model, 'detail') ?>
+
     <?php // echo $form->field($model, 'category') ?>
 
     <?php // echo $form->field($model, 'hidden') ?>
