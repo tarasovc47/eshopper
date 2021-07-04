@@ -105,7 +105,7 @@ use yii\data\ActiveDataProvider;
                         <div class="product-image-wrapper">
                             <div class="single-products">
                                 <div class="productinfo text-center">
-                                    <img src="<?= $product->showImage() ?>" alt="" />
+                                    <a href="<?= Url::to(['product/view', 'id'=>$product->id]) ?>"><img src="<?= $product->showImage() ?>" alt="" /></a>
                                     <h2><?= $product->cost ?> $</h2>
                                     <p><a href="<?= Url::to(['product/view', 'id'=>$product->id]) ?>"><?= $product->title ?></a></p>
                                     <a href="<?= Url::to(['cart/add', 'id' => $product->id]) ?>"  data-id="<?= $product->id ?>" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Купить</a>
@@ -146,7 +146,7 @@ use yii\data\ActiveDataProvider;
                                                 <img src="<?= $item->showImage() ?>" alt="" />
                                                 <h2><?= $item->cost ?> $</h2>
                                                 <p><?= $item->title ?></p>
-                                                <a href="<?= Url::to(['cart/add', 'id' => $product->id]) ?>" id="item<?= $product->id ?>" data-id="<?= $product->id ?>" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                                <a href="<?= Url::to(['cart/add', 'id' => $item->id]) ?>"  data-id="<?= $item->id ?>" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Купить</a>
                                             </div>
                                         </div>
                                         <?php endforeach; ?>
