@@ -17,10 +17,10 @@ use yii\helpers\Url;
                     echo $this->render('../partials/brand', [
                         'brands' => $brands,
                     ]);
-                    echo $this->render('../partials/priceRange', [
+                    /*echo $this->render('../partials/priceRange', [
                         'products_cost_min' => $products_cost_min,
                         'products_cost_max' => $products_cost_max,
-                    ])
+                    ])*/
                     ?>
 
                     <div class="shipping text-center"><!--shipping-->
@@ -37,37 +37,6 @@ use yii\helpers\Url;
                             <?= Html::img("@web/uploads/{$product->image}")?>
                             <h3>ZOOM</h3>
                         </div>
-                        <!--<div id="similar-product" class="carousel slide" data-ride="carousel">-->
-
-                              <!-- Wrapper for slides -->
-                                <!--<div class="carousel-inner">
-                                    <div class="item active">
-                                      <a href=""><img src="/web/images/product-details/similar1.jpg" alt=""></a>
-                                      <a href=""><img src="/web/images/product-details/similar2.jpg" alt=""></a>
-                                      <a href=""><img src="/web/images/product-details/similar3.jpg" alt=""></a>
-                                    </div>
-                                    <div class="item">
-                                      <a href=""><img src="/web/images/product-details/similar1.jpg" alt=""></a>
-                                      <a href=""><img src="/web/images/product-details/similar2.jpg" alt=""></a>
-                                      <a href=""><img src="/web/images/product-details/similar3.jpg" alt=""></a>
-                                    </div>
-                                    <div class="item">
-                                      <a href=""><img src="/web/images/product-details/similar1.jpg" alt=""></a>
-                                      <a href=""><img src="/web/images/product-details/similar2.jpg" alt=""></a>
-                                      <a href=""><img src="/web/images/product-details/similar3.jpg" alt=""></a>
-                                    </div>
-
-                                </div>-->
-
-                              <!-- Controls -->
-                              <!--<a class="left item-control" href="#similar-product" data-slide="prev">
-                                <i class="fa fa-angle-left"></i>
-                              </a>
-                              <a class="right item-control" href="#similar-product" data-slide="next">
-                                <i class="fa fa-angle-right"></i>
-                              </a>-->
-                        <!--</div>-->
-
                     </div>
                     <div class="col-sm-7">
                         <div class="product-information"><!--/product-information-->
@@ -88,7 +57,7 @@ use yii\helpers\Url;
                                 <a class="btn cart add-to-cart" data-id="<?= $product->id ?>">
                                     <i class="fa fa-shopping-cart"></i>Купить</a>
                             </span>
-                            <p><b>Категория: </b><a href="<?= Url::to(['category/view', 'id' => $product->category->id]) ?>"><?= $product->category->title ?></a></p>
+                            <p><b>Категория: </b><a href="<?= Url::to(['site/category', 'id' => $product->category->id]) ?>"><?= $product->category->title ?></a></p>
                         </div><!--/product-information-->
                     </div>
                 </div><!--/product-details-->
