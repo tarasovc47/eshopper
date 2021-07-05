@@ -1,6 +1,7 @@
 <?php
 
 use yii\helpers\Html;
+use yii\helpers\Url;
 
 if (!empty($session['cart'])) : ?>
     <div class="table-responsive">
@@ -17,8 +18,8 @@ if (!empty($session['cart'])) : ?>
             <tbody>
             <?php foreach ($session['cart'] as $id => $item): ?>
                 <tr>
-                    <td><?= Html::img("@web/uploads/{$item['image']}", ['alt' => $item['title'], 'height' => 100]) ?></td>
-                    <td><?= $item['title'] ?></td>
+                    <td><a href="<?= Url::to(['/product/view', 'id' => $id]) ?>"><?= Html::img("@web/uploads/{$item['image']}", ['alt' => $item['title'], 'height' => 100]) ?></a></td>
+                    <td><a href="<?= Url::to(['/product/view', 'id' => $id]) ?>"><?= $item['title'] ?></a></td>
                     <td><?= $item['qty'] ?></td>
                     <td><?= $item['cost'] ?></td>
                     <td><span data-id="<?= $id ?>" class="glyphicon glyphicon-remove text-danger del-item" style="cursor: pointer" aria-hidden="true"></td>

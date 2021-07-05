@@ -323,7 +323,7 @@ Modal::begin([
     'size' => 'modal-lg',
     'footer' =>
         '<button type="button" class="btn btn-default" data-dismiss="modal">Продолжить покупки</button>
-        <button type="button" class="btn btn-default">Оформить заказ</button>
+        <a href=' . Url::to('/cart/view') . ' type="button" class="btn btn-default">Оформить заказ</a>
         <button type="button" class="btn btn-danger" onclick="clearCart()">Очистить корзину</button>',
 ]);
 
