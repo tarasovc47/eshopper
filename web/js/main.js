@@ -46,6 +46,27 @@ $('#cart-modal .modal-body').on('click', '.del-item', function (){
         }
     });
 });
+$('#cart-table').on('click', '.del-item', function (){
+    var id = $(this).data('id');
+    $.ajax({
+        url: '/cart/del-item',
+        data: {id: id},
+        type: 'GET',
+        success: function (res) {
+            if(!res) alert ('Нет такого товара');
+            $('#cart-table').html(res);
+            /*if (res == '<h3>Корзина пуста</h3>')
+            {
+                console.log(res);
+                alert('!!!');
+                $('button.btn.btn-success').remove();
+            }*/
+        },
+        error: function () {
+            alert('ALERT!');
+        }
+    });
+});
 
 function clearCart(){
     $.ajax({

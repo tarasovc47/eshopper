@@ -7,7 +7,7 @@ use yii\widgets\ActiveForm;
 <div class="container">
     <?php if (!empty($session['cart'])) : ?>
         <div class="table-responsive">
-            <table class="table table-hover table-striped">
+            <table class="table table-hover table-striped" id="cart-table">
                 <thead>
                     <tr>
                         <th>Фото</th>

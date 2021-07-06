@@ -56,4 +56,11 @@ class CartController extends Controller
         $this->layout = false;
         return $this->render('cart-modal', compact('session'));
     }
+
+    public function actionView()
+    {
+        $session = Yii::$app->session;
+        $session->open();
+        return $this->render('/cart/view', compact('session'));
+    }
 }
