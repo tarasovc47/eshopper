@@ -16,9 +16,13 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'date')->textInput() ?>
 
-    <?= $form->field($model, 'user')->textInput() ?>
+    <?= $form->field($model, 'user_id')->textInput() ?>
 
     <?= $form->field($model, 'confirm')->textInput() ?>
+
+    <?= $form->field($model, 'quantity')->textInput() ?>
+
+    <?= $form->field($model, 'sum')->textInput() ?>
 
     <?= $form->field($model, 'status')->textInput(['maxlength' => true]) ?>
 

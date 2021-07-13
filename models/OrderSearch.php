@@ -17,7 +17,7 @@ class OrderSearch extends Order
     public function rules()
     {
         return [
-            [['id', 'user', 'confirm'], 'integer'],
+            [['id', 'user_id', 'confirm', 'quantity', 'sum'], 'integer'],
             [['address', 'date', 'status'], 'safe'],
         ];
     }
@@ -60,8 +60,10 @@ class OrderSearch extends Order
         $query->andFilterWhere([
             'id' => $this->id,
             'date' => $this->date,
-            'user' => $this->user,
+            'user_id' => $this->user_id,
             'confirm' => $this->confirm,
+            'quantity' => $this->quantity,
+            'sum' => $this->sum,
         ]);
 
         $query->andFilterWhere(['like', 'address', $this->address])

@@ -29,7 +29,9 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             'address',
             'date',
-            'user',
+            'user_id',
+            'quantity',
+            'sum',
             'confirm',
             //'status',
 

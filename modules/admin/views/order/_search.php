@@ -21,9 +21,13 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'date') ?>
 
-    <?= $form->field($model, 'user') ?>
+    <?= $form->field($model, 'user_id') ?>
 
     <?= $form->field($model, 'confirm') ?>
+
+    <?= $form->field($model, 'quantity') ?>
+
+    <?= $form->field($model, 'sum') ?>
 
     <?php // echo $form->field($model, 'status') ?>
 

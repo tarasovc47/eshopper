@@ -3,6 +3,9 @@
 namespace app\models;
 
 use Yii;
+use yii\behaviors\TimestampBehavior;
+use yii\db\ActiveRecord;
+use yii\db\Expression;
 
 /**
  * This is the model class for table "orders".
@@ -10,7 +13,7 @@ use Yii;
  * @property int $id
  * @property string $address
  * @property string $date
- * @property int $user
+ * @property int $user_id
  * @property int|null $confirm
  * @property string|null $status
  *
@@ -33,11 +36,11 @@ class Order extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['address', 'date', 'user'], 'required'],
+            [['address', 'date', 'user_id', 'quantity', 'sum'], 'required'],
             [['date'], 'safe'],
-            [['user', 'confirm'], 'integer'],
+            [['user_id', 'confirm', 'quantity', 'sum'], 'integer'],
             [['address', 'status'], 'string', 'max' => 255],
-            [['user'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user' => 'id']],
+            [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
         ];
     }
 
@@ -50,7 +53,9 @@ class Order extends \yii\db\ActiveRecord
             'id' => 'ID',
             'address' => 'Address',
             'date' => 'Date',
-            'user' => 'User',
+            'quantity' => 'Quantity',
+            'sum' => 'Sum',
+            'user_id' => 'User',
             'confirm' => 'Confirm',
             'status' => 'Status',
         ];
@@ -71,7 +76,7 @@ class Order extends \yii\db\ActiveRecord
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getUser0()
+    public function getUser()
     {
         return $this->hasOne(User::className(), ['id' => 'user']);
     }
