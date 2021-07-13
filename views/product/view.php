@@ -42,18 +42,18 @@ use yii\helpers\Url;
                         <div class="product-information"><!--/product-information-->
                             <?php if ($product->new)
                             {
-                                echo Html::img("@web/images/technical-images/new.jpg");
+                                echo Html::img("@web/images/technical-images/new.png",['style' => 'height:50px']);
                             }
                             if ($product->sale)
                             {
-                                echo Html::img("@web/images/technical-images/sale.png");
+                                echo Html::img("@web/images/technical-images/sale.png",['style' => 'height:50px']);
                             }
                             ?>
                             <h2><?= $product->title ?></h2>
                             <span>
                                 <span><?= $product->cost ?> $</span>
                                 <label>Количество:</label>
-                                <input type="text" id="qty" />
+                                <input type="number" id="qty" value="1" />
                                 <a class="btn cart add-to-cart" data-id="<?= $product->id ?>">
                                     <i class="fa fa-shopping-cart"></i>Купить</a>
                             </span>
