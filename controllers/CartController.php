@@ -105,6 +105,7 @@ class CartController extends Controller
             $orderItems->product_count = $item['qty'];
             $orderItems->product_price = $item['cost'];
             $orderItems->order_sum = $item['qty'] * $item['cost'];
+            $orderItems->save();
         }
     }
 }
