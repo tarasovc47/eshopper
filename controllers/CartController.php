@@ -7,6 +7,7 @@ use app\models\Order;
 use app\models\OrderItem;
 use yii\base\BaseObject;
 use yii\db\Expression;
+use yii\helpers\Url;
 use yii\web\Controller;
 use app\models\Product;
 use app\models\Cart;
@@ -68,6 +69,11 @@ class CartController extends Controller
         if ($order->load(Yii::$app->request->post()))
         {
             $order->user_id = Yii::$app->user->id;
+            if ($order->user_id == null)
+            {
+                Yii::$app->session->setFlash('need_auth', 'Для продолжения необходимо <a href="' . URl::toRoute(['auth/signup']) . '">зарегистрироваться</a> или <a href="' . URl::toRoute(['auth/login']) . '">войти</a> под своей учётной записью');
+                $this->refresh();
+            }
             $order->date = new Expression('NOW()');
             $order->quantity = $session['cart.qty'];
             $order->sum = $session['cart.cost'];
