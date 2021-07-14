@@ -17,14 +17,14 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="site-login">
                 <h1><?= Html::encode($this->title) ?></h1>
 
-                <p>Please fill out the following fields to login:</p>
+                <p>Пожалуйста заполните все поля</p>
 
                 <?php $form = ActiveForm::begin([
                     'id' => 'login-form',
                     'layout' => 'horizontal',
                     'fieldConfig' => [
                         'template' => "{label}\n<div class=\"col-lg-3\">{input}</div>\n<div class=\"col-lg-8\">{error}</div>",
-                        'labelOptions' => ['class' => 'col-lg-1 control-label'],
+                        'labelOptions' => ['class' => 'col-lg-2 control-label'],
                     ],
                 ]); ?>
 
@@ -54,11 +54,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 </div>
 
                 <?php ActiveForm::end(); ?>
-
-                <div class="col-lg-offset-1" style="color:#999;">
-                    You may login with <strong>admin/admin</strong> or <strong>demo/demo</strong>.<br>
-                    To modify the username/password, please check out the code <code>app\models\User::$users</code>.
-                </div>
             </div>
         </div>
     </div>

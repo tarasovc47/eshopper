@@ -50,15 +50,15 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
     {
         return [
             'id' => 'ID',
-            'name' => 'Name',
-            'surname' => 'Surname',
-            'gender' => 'Gender',
-            'login' => 'Login',
-            'email' => 'Email',
-            'password' => 'Password',
-            'phone' => 'Phone',
-            'confirm' => 'Confirm',
-            'isAdmin' => 'Is Admin',
+            'name' => 'Имя',
+            'surname' => 'Фамилия',
+            'gender' => 'Пол',
+            'login' => 'Логин',
+            'email' => 'E-mail',
+            'password' => 'Пароль',
+            'phone' => 'Мобильный телефон',
+            'confirm' => 'Подтверждённая учётная запись',
+            'isAdmin' => 'Администратор',
         ];
     }
 

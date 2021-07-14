@@ -25,6 +25,21 @@ class SignupForm extends  Model
         ];
     }
 
+    public function attributeLabels()
+    {
+        return [
+            'name' => 'Имя',
+            'surname' => 'Фамилия',
+            'gender' => 'Пол',
+            'login' => 'Логин',
+            'email' => 'E-mail',
+            'password' => 'Пароль',
+            'phone' => 'Мобильный телефон',
+            'confirm' => 'Подтверждённая учётная запись',
+            'isAdmin' => 'Администратор',
+        ];
+    }
+
     public function signup()
     {
         if ($this->validate())
