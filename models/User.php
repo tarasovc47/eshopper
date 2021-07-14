@@ -115,4 +115,18 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
     {
         return $this->save(false);
     }
+
+    public static function findIdentityByLoginOrEmail($identity)
+    {
+        if ($user = static::findOne(['login' => $identity]))
+        {
+            return $user;
+        }
+
+        if ($user = static::findOne(['email' => $identity]))
+        {
+            return $user;
+        }
+        return null;
+    }
 }

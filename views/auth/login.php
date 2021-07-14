@@ -26,16 +26,14 @@ $this->params['breadcrumbs'][] = $this->title;
                         'labelOptions' => ['class' => 'col-lg-1 control-label'],
                     ],
                 ]); ?>
-
-                    <?= $form->field($model, 'username')->textInput(['autofocus' => true]) ?>
-
-                    <?= $form->field($model, 'email')->textInput() ?>
+                    <?= $form->field($model,'identity')->textInput() ?>
 
                     <?= $form->field($model, 'password')->passwordInput() ?>
 
                     <?= $form->field($model, 'rememberMe')->checkbox([
                         'template' => "<div class=\"col-lg-offset-1 col-lg-3\">{input} {label}</div>\n<div class=\"col-lg-8\">{error}</div>",
-                    ]) ?>
+                    ])?>
+                    <input type="hidden" name="<?= Yii::$app->request->csrfParam; ?>" value="<?= Yii::$app->request->getCsrfToken(); ?>" />
 
                     <div class="form-group">
                         <div class="col-lg-offset-1 col-lg-11">
