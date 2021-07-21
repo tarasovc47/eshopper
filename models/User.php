@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use yii\helpers\ArrayHelper;
 use yii\web\IdentityInterface;
 
 /**
@@ -128,5 +129,13 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
             return $user;
         }
         return null;
+    }
+
+    public function changePassword($data)
+    {
+        $newpassword = ArrayHelper::getValue($data, 'User.password');
+        $query = Yii::$app->db;
+        $query->createCommand('UPDATE `users` SET `password`="' . $newpassword . '" WHERE `id`=' . Yii::$app->user->id)->execute();
+        return true;
     }
 }
