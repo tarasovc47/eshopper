@@ -29,7 +29,7 @@ class PublicAsset extends AssetBundle
         "css/responsive.css",
     ];
     public $js = [
-        "js/jquery.js",
+        //"js/jquery.js",
         "js/bootstrap.min.js",
         "js/jquery.scrollUp.min.js",
         "js/price-range.js",

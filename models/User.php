@@ -133,9 +133,51 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
 
     public function changePassword($data)
     {
-        $newpassword = ArrayHelper::getValue($data, 'User.password');
-        $query = Yii::$app->db;
-        $query->createCommand('UPDATE `users` SET `password`="' . $newpassword . '" WHERE `id`=' . Yii::$app->user->id)->execute();
-        return true;
+        $newPassword = ArrayHelper::getValue($data, 'User.password');
+        if($newPassword != null)
+        {
+            $query = Yii::$app->db;
+            $query->createCommand('UPDATE `users` SET `password`="' . $newPassword . '" WHERE `id`=' . Yii::$app->user->id)->execute();
+            return true;
+        }
+    }
+
+    public function changeLogin($data)
+    {
+        $newLogin = ArrayHelper::getValue($data, 'User.login');
+        if($newLogin != null)
+        {
+            $query = Yii::$app->db;
+            if ( $query->createCommand('UPDATE `users` SET `login`="' . $newLogin . '" WHERE `id`=' . Yii::$app->user->id)->execute())
+            {
+                return true;
+            }
+        }
+    }
+
+    public function changeEmail($data)
+    {
+        $newEmail = ArrayHelper::getValue($data, 'User.email');
+        if($newEmail != null)
+        {
+            $query = Yii::$app->db;
+            if ( $query->createCommand('UPDATE `users` SET `email`="' . $newEmail . '" WHERE `id`=' . Yii::$app->user->id)->execute())
+            {
+                return true;
+            }
+        }
+    }
+
+    public function changePhone($data)
+    {
+        $newPhone = ArrayHelper::getValue($data, 'User.phone');
+        if($newPhone != null)
+        {
+            $query = Yii::$app->db;
+            if ( $query->createCommand('UPDATE `users` SET `phone`="' . $newPhone . '" WHERE `id`=' . Yii::$app->user->id)->execute())
+            {
+                return true;
+            }
+        }
     }
 }
