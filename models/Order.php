@@ -80,4 +80,30 @@ class Order extends \yii\db\ActiveRecord
     {
         return $this->hasOne(User::className(), ['id' => 'user']);
     }
+
+    public function saveOrder($user_id, $session)
+    {
+        $this->user_id = $user_id;
+        if ($this->user_id == null)
+        {
+            Yii::$app->session->setFlash('need_auth', 'Для продолжения необходимо <a href="' . URl::toRoute(['auth/signup']) . '">зарегистрироваться</a> или <a href="' . URl::toRoute(['auth/login']) . '">войти</a> под своей учётной записью');
+            $this->refresh();
+        }
+        $this->date = new Expression('NOW()');
+        $this->quantity = $session['cart.qty'];
+        $this->sum = $session['cart.cost'];
+        if ($this->save())
+        {
+            OrderItem::saveOrderItems($session['cart'], $this->id);
+            Yii::$app->session->setFlash('success', 'Ваш заказ принят, менеджер свяжется с вами в ближайшее время');
+            $session->remove('cart');
+            $session->remove('cart.qty');
+            $session->remove('cart.cost');
+            return $this->refresh();
+        }
+        else
+        {
+            Yii::$app->session->setFlash('error', 'Произошла ошибка');
+        }
+    }
 }

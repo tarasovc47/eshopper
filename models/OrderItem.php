@@ -75,4 +75,19 @@ class OrderItem extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Product::className(), ['id' => 'product_id']);
     }
+
+    public static function saveOrderItems($items, $order_id)
+    {
+        foreach ($items as $id => $item)
+        {
+            $orderItems = new OrderItem();
+            $orderItems->order_id = $order_id;
+            $orderItems->product_id = $id;
+            $orderItems->title = $item['title'];
+            $orderItems->product_count = $item['qty'];
+            $orderItems->product_price = $item['cost'];
+            $orderItems->order_sum = $item['qty'] * $item['cost'];
+            $orderItems->save();
+        }
+    }
 }

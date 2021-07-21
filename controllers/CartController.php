@@ -68,44 +68,8 @@ class CartController extends Controller
         $order = new Order();
         if ($order->load(Yii::$app->request->post()))
         {
-            $order->user_id = Yii::$app->user->id;
-            if ($order->user_id == null)
-            {
-                Yii::$app->session->setFlash('need_auth', 'Для продолжения необходимо <a href="' . URl::toRoute(['auth/signup']) . '">зарегистрироваться</a> или <a href="' . URl::toRoute(['auth/login']) . '">войти</a> под своей учётной записью');
-                $this->refresh();
-            }
-            $order->date = new Expression('NOW()');
-            $order->quantity = $session['cart.qty'];
-            $order->sum = $session['cart.cost'];
-            if ($order->save())
-            {
-                $this->saveOrderItems($session['cart'], $order->id);
-                Yii::$app->session->setFlash('success', 'Ваш заказ принят, менеджер свяжется с вами в ближайшее время');
-                $session->remove('cart');
-                $session->remove('cart.qty');
-                $session->remove('cart.cost');
-                return $this->refresh();
-            }
-            else
-            {
-                Yii::$app->session->setFlash('error', 'Произошла ошибка');
-            }
+            $order->saveOrder(Yii::$app->user->id, $session);
         }
         return $this->render('/cart/view', compact('session', 'order'));
-    }
-
-    protected function saveOrderItems($items, $order_id)
-    {
-        foreach ($items as $id => $item)
-        {
-            $orderItems = new OrderItem();
-            $orderItems->order_id = $order_id;
-            $orderItems->product_id = $id;
-            $orderItems->title = $item['title'];
-            $orderItems->product_count = $item['qty'];
-            $orderItems->product_price = $item['cost'];
-            $orderItems->order_sum = $item['qty'] * $item['cost'];
-            $orderItems->save();
-        }
     }
 }
