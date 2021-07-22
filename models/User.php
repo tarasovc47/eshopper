@@ -70,7 +70,7 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
      */
     public function getOrders()
     {
-        return $this->hasMany(Order::className(), ['user' => 'id']);
+        return $this->hasMany(Order::className(), ['user_id' => 'id']);
     }
 
     public static function findIdentity($id)
