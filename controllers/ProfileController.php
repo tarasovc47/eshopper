@@ -5,11 +5,27 @@ namespace app\controllers;
 use app\models\User;
 use Yii;
 use yii\base\BaseObject;
+use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 
 class ProfileController extends Controller
 {
+    public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'roles' => ['@']
+                    ]
+                ]
+            ]
+        ];
+    }
+
     public $model;
     public function actionIndex()
     {
@@ -17,7 +33,6 @@ class ProfileController extends Controller
         if ($model === null) {
             throw new NotFoundHttpException;
         }
-
         return $this->render('index', [
             'model' => $model,
         ]);
