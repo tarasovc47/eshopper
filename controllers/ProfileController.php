@@ -38,63 +38,23 @@ class ProfileController extends Controller
         ]);
     }
 
-    public function actionChangePassword()
+    public function actionChangeSettings()
     {
-        $model = new User();
-        if ($model->changePassword($_POST))
+        $user = User::findOne(Yii::$app->user->identity->id);
+        $request = Yii::$app->request;
+        if (Yii::$app->request->post() != null)
         {
-            Yii::$app->session->setFlash('successChangePassword', 'Пароль успешно изменён!');
-            return $this->render('index');
+            $user->password = $request->post()['User']['password'];
+            $user->login = $request->post()['User']['login'];
+            $user->email = $request->post()['User']['email'];
+            $user->phone = $request->post()['User']['phone'];
+            if ($user->save(false))
+            {
+                Yii::$app->session->setFlash('successChange', 'Success');
+                return $this->render('index');
+            }
         }
-        if ($model->changePassword($_POST) == null)
-        {
-            Yii::$app->session->setFlash('noChangePassword', 'Пароль не был изменён!');
-        }
-    return $this->render('changePassword', ['model' => $model]);
-    }
-
-    public function actionChangeLogin()
-    {
-        $model = new User();
-        if ($model->changeLogin($_POST))
-        {
-            Yii::$app->session->setFlash('successChangeLogin', 'Логин успешно изменён!');
-            return $this->render('index');
-        }
-        if ($model->changeLogin($_POST) == null)
-        {
-            Yii::$app->session->setFlash('noChangeLogin', 'Логин не был изменён!');
-        }
-        return $this->render('changeLogin', ['model' => $model]);
-    }
-
-    public function actionChangeEmail()
-    {
-        $model = new User();
-        if ($model->changeEmail($_POST))
-        {
-            Yii::$app->session->setFlash('successChangeEmail', 'Email успешно изменён!');
-            return $this->render('index');
-        }
-        if ($model->changeEmail($_POST) == null)
-        {
-            Yii::$app->session->setFlash('noChangeEmail', 'Email не был изменён!');
-        }
-        return $this->render('changeEmail', ['model' => $model]);
-    }
-
-    public function actionChangePhone()
-    {
-        $model = new User();
-        if ($model->changePhone($_POST))
-        {
-            Yii::$app->session->setFlash('successChangePhone', 'Телефон успешно изменён!');
-            return $this->render('index');
-        }
-        if ($model->changePhone($_POST) == null)
-        {
-            Yii::$app->session->setFlash('noChangePhone', 'Телефон не был изменён!');
-        }
-        return $this->render('changePhone', ['model' => $model]);
+        Yii::$app->session->setFlash('noChange', 'No change');
+        return $this->render('changeSettings', ['model' => $user]);
     }
 }
