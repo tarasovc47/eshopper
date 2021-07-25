@@ -65,7 +65,7 @@ PublicAsset::register($this);
                     <div class="logo pull-left">
                         <a href="/"><?= Html::img('@web/public/images/home/logo.png') ?></a>
                     </div>
-                    <div class="btn-group pull-right">
+                    <!--<div class="btn-group pull-right">
                         <div class="btn-group">
                             <button type="button" class="btn btn-default dropdown-toggle usa" data-toggle="dropdown">
                                 USA
@@ -87,7 +87,7 @@ PublicAsset::register($this);
                                 <li><a href="#">Pound</a></li>
                             </ul>
                         </div>
-                    </div>
+                    </div>-->
                 </div>
                 <div class="col-sm-8">
                     <div class="shop-menu pull-right">
@@ -96,7 +96,7 @@ PublicAsset::register($this);
                                 <li><a href="<?= Url::toRoute('/profile/index') ?>"><i class="fa fa-user"></i> Личный кабинет</a></li>
                             <?php endif;?>
                             <li><a href="#"><i class="fa fa-star"></i> Wishlist</a></li>
-                            <li><a href="checkout.html"><i class="fa fa-crosshairs"></i> Checkout</a></li>
+                            <!--<li><a href="checkout.html"><i class="fa fa-crosshairs"></i> Checkout</a></li>-->
                             <li><a href="#" onclick="return getCart()"><i class="fa fa-shopping-cart"></i> Корзина</a></li>
                             <?php
                             if (Yii::$app->user->isGuest):?>
@@ -112,8 +112,8 @@ PublicAsset::register($this);
         </div>
     </div><!--/header-middle-->
 
-    <div class="header-bottom"><!--header-bottom-->
-        <div class="container">
+    <!--<div class="header-bottom">--><!--header-bottom-->
+        <!--<div class="container">
             <div class="row">
                 <div class="col-sm-9">
                     <div class="navbar-header">
@@ -132,7 +132,7 @@ PublicAsset::register($this);
                                     <li><a href="shop.html">Products</a></li>
                                     <li><a href="product-details.html">Product Details</a></li>
                                     <li><a href="checkout.html">Checkout</a></li>
-                                    <li><a href="<?= Url::to('/cart/view') ?>">Перейти в корзину</a></li>
+                                    <li><a href="<?/*= Url::to('/cart/view') */?>">Перейти в корзину</a></li>
                                 </ul>
                             </li>
                             <li class="dropdown"><a href="#">Blog<i class="fa fa-angle-down"></i></a>
@@ -152,8 +152,8 @@ PublicAsset::register($this);
                     </div>
                 </div>
             </div>
-        </div>
-    </div><!--/header-bottom-->
+        </div>-->
+    <!--</div>--><!--/header-bottom-->
 </header><!--/header-->
 
 <?= $content ?>
