@@ -1,5 +1,6 @@
 <?php
 
+use app\models\OrderStatus;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
@@ -36,7 +37,15 @@ $this->params['breadcrumbs'][] = $this->title;
             'confirm',
             'quantity',
             'sum',
-            'status_id',
+            'status_id' =>
+            [
+                'label' => 'Статус',
+                'value' => function($data)
+                {
+                    $status = OrderStatus::find()->where(['id' => $data->status_id])->one();
+                    return $status->status;
+                }
+            ]
         ],
     ]) ?>
 

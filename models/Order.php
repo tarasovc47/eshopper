@@ -51,13 +51,13 @@ class Order extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'address' => 'Address',
-            'date' => 'Date',
-            'quantity' => 'Quantity',
-            'sum' => 'Sum',
-            'user_id' => 'User',
-            'confirm' => 'Confirm',
-            'status_id' => 'Status',
+            'address' => 'Адрес доставки',
+            'date' => 'Дата заказа',
+            'quantity' => 'Количество',
+            'sum' => 'Сумма',
+            'user_id' => 'Покупатель',
+            'confirm' => 'Подтверждён',
+            'status_id' => 'Статус',
         ];
     }
 
