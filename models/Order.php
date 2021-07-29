@@ -15,7 +15,7 @@ use yii\db\Expression;
  * @property string $date
  * @property int $user_id
  * @property int|null $confirm
- * @property string|null $status
+ * @property string|null $status_id
  *
  * @property OrderItem[] $orderItems
  * @property User $user0
@@ -39,7 +39,7 @@ class Order extends \yii\db\ActiveRecord
             [['address', 'date', 'user_id', 'quantity', 'sum'], 'required'],
             [['date'], 'safe'],
             [['user_id', 'confirm', 'quantity', 'sum'], 'integer'],
-            [['address', 'status'], 'string', 'max' => 255],
+            [['address', 'status_id'], 'string', 'max' => 255],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
         ];
     }
@@ -57,7 +57,7 @@ class Order extends \yii\db\ActiveRecord
             'sum' => 'Sum',
             'user_id' => 'User',
             'confirm' => 'Confirm',
-            'status' => 'Status',
+            'status_id' => 'Status',
         ];
     }
 

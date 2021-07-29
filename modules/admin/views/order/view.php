@@ -36,7 +36,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'confirm',
             'quantity',
             'sum',
-            'status',
+            'status_id',
         ],
     ]) ?>
 

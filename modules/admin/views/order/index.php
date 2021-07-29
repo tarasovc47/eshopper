@@ -1,5 +1,7 @@
 <?php
 
+use app\models\OrderStatus;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\grid\GridView;
 
@@ -33,7 +35,12 @@ $this->params['breadcrumbs'][] = $this->title;
             'quantity',
             'sum',
             'confirm',
-            //'status',
+            'status_id' =>
+                [
+                    'label' => 'Статус',
+                    'attribute' => 'status_id',
+                    'filter' => ArrayHelper::map(OrderStatus::find()->all(), 'id', 'status'),
+                ],
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

@@ -51,7 +51,7 @@ use app\controllers\ProfileController;
             <td><?= $userOrder->date ?></td>
             <td><?= $userOrder->address ?></td>
             <td><?= $userOrder->confirm ?></td>
-            <td><?= $userOrder->status ?></td>
+            <td><?= $userOrder->status_id ?></td>
             <td><?= $userOrder->sum ?></td>
             <td><?= $userOrder->quantity ?></td>
             <td>
