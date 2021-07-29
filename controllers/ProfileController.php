@@ -41,13 +41,8 @@ class ProfileController extends Controller
     public function actionChangeSettings()
     {
         $user = User::findOne(Yii::$app->user->identity->id);
-        $request = Yii::$app->request;
-        if (Yii::$app->request->post() != null)
+        if ($user->load(Yii::$app->request->post()))
         {
-            $user->password = $request->post()['User']['password'];
-            $user->login = $request->post()['User']['login'];
-            $user->email = $request->post()['User']['email'];
-            $user->phone = $request->post()['User']['phone'];
             if ($user->save(false))
             {
                 Yii::$app->session->setFlash('successChange', 'Success');
