@@ -12,7 +12,7 @@ function showCart(cart){
 }
 
 $(document).ready(function (){
-    $('div .tab-pane:first-child').addClass('active');
+    $('div .tab-pane:first-child').toggleClass('fade active');
     $('.nav-tabs li:first-child').addClass('active');
 })
 
