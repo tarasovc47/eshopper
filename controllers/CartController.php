@@ -4,15 +4,12 @@
 namespace app\controllers;
 
 use app\models\Order;
-use app\models\OrderItem;
 use yii\base\BaseObject;
 use yii\db\Expression;
-use yii\helpers\Url;
 use yii\web\Controller;
 use app\models\Product;
 use app\models\Cart;
 use Yii;
-use yii\web\Response;
 
 class CartController extends Controller
 {
@@ -37,9 +34,7 @@ class CartController extends Controller
     {
         $session = Yii::$app->session;
         $session->open();
-        $session->remove('cart');
-        $session->remove('cart.qty');
-        $session->remove('cart.cost');
+        Cart::clearCart($session);
         $this->layout = false;
         return $this->render('cart-modal', compact('session'));
     }
@@ -48,8 +43,7 @@ class CartController extends Controller
         $id = Yii::$app->request->get('id');
         $session = Yii::$app->session;
         $session->open();
-        $cart = new Cart();
-        $cart->recalc($id);
+        Cart::recalc($id);
         $this->layout = false;
         return $this->render('cart-modal', compact('session'));
     }
@@ -66,10 +60,7 @@ class CartController extends Controller
         $session = Yii::$app->session;
         $session->open();
         $order = new Order();
-        if ($order->load(Yii::$app->request->post()))
-        {
-            $order->saveOrder(Yii::$app->user->id, $session);
-        }
+        Cart::viewCart($order, $session);
         return $this->render('/cart/view', compact('session', 'order'));
     }
 }

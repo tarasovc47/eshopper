@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use Yii;
 use yii\db\ActiveRecord;
 
 class Cart extends ActiveRecord
@@ -26,7 +27,7 @@ class Cart extends ActiveRecord
         $_SESSION['cart.cost'] = isset($_SESSION['cart.cost']) ? $_SESSION['cart.cost'] + $qty * $product->cost : $qty * $product->cost;
     }
 
-    public function recalc($id)
+    public static function recalc($id)
     {
         if (!isset($_SESSION['cart'][$id])) return false;
 
@@ -35,5 +36,22 @@ class Cart extends ActiveRecord
         $_SESSION['cart.qty'] -= $qtyMinus;
         $_SESSION['cart.cost'] -= $costMinus;
         unset($_SESSION['cart'][$id]);
+    }
+
+    public static function clearCart($session)
+    {
+        $session->remove('cart');
+        $session->remove('cart.qty');
+        $session->remove('cart.cost');
+        return $session;
+    }
+
+    public static function viewCart($order, $session)
+    {
+        if ($order->load(Yii::$app->request->post()))
+        {
+            $order->saveOrder(Yii::$app->user->id, $session);
+        }
+        return $order;
     }
 }
