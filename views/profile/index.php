@@ -28,8 +28,8 @@ use app\controllers\ProfileController;
     <?php Yii::$app->session->removeAllFlashes(); ?>
 
     <h3>Ваши заказы</h3>
-    <?php $orders = new User(Yii::$app->user->identity); ?>
-    <?php $userOrders = $orders->orders; ?>
+    <?php $user = new User(Yii::$app->user->identity); ?>
+    <?php $userOrders = $user->orders; ?>
     <table class="table">
         <thead>
         <tr>
@@ -50,8 +50,8 @@ use app\controllers\ProfileController;
             <td><?= $userOrder->id ?></td>
             <td><?= $userOrder->date ?></td>
             <td><?= $userOrder->address ?></td>
-            <td><?= $userOrder->confirm ?></td>
-            <td><?= $userOrder->status_id ?></td>
+            <td><?= ($userOrder->confirm == '1') ? 'Подтверждён' : 'Не подтверждён' ?></td>
+            <td><?php var_dump($userOrder->status_id) ?></td>
             <td><?= $userOrder->sum ?></td>
             <td><?= $userOrder->quantity ?></td>
             <td>

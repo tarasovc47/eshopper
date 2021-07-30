@@ -6,6 +6,7 @@ use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 use yii\db\Expression;
+use yii\helpers\Url;
 
 /**
  * This is the model class for table "orders".
@@ -100,10 +101,6 @@ class Order extends \yii\db\ActiveRecord
             $session->remove('cart.qty');
             $session->remove('cart.cost');
             return $this->refresh();
-        }
-        else
-        {
-            Yii::$app->session->setFlash('error', 'Произошла ошибка');
         }
     }
 }
