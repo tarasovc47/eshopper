@@ -42,11 +42,11 @@ class SignupForm extends  Model
 
     public function signup()
     {
-        if ($this->validate())
+        if ($this->validate()) // если валидацию прошли
         {
-            $user = new User();
-            $user->attributes = $this->attributes;
-            return $user->create();
+            $user = new User(); //создаём новый экземпляр класса Юзер
+            $user->attributes = $this->attributes; // добавляем ему все аттрибуты из формы
+            return $user->create(); // и создаём пользователя
         }
     }
 }

@@ -25,15 +25,15 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'login') ?>
 
-    <?php // echo $form->field($model, 'email') ?>
+    <?= $form->field($model, 'email') ?>
 
     <?php // echo $form->field($model, 'password') ?>
 
-    <?php // echo $form->field($model, 'phone') ?>
+    <?= $form->field($model, 'phone') ?>
 
-    <?php // echo $form->field($model, 'confirm') ?>
+    <?= $form->field($model, 'confirm') ?>
 
-    <?php // echo $form->field($model, 'isAdmin') ?>
+    <?= $form->field($model, 'isAdmin') ?>
 
     <div class="form-group">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>

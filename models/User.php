@@ -117,17 +117,17 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
         return $this->save(false);
     }
 
-    public static function findIdentityByLoginOrEmail($identity)
+    public static function findIdentityByLoginOrEmail($identity) // принимаем параметр $identity
     {
-        if ($user = static::findOne(['login' => $identity]))
+        if ($user = static::findOne(['login' => $identity])) // ищем $identity по полю логина
         {
             return $user;
         }
 
-        if ($user = static::findOne(['email' => $identity]))
+        if ($user = static::findOne(['email' => $identity])) // если не находим - ищем по email
         {
             return $user;
         }
-        return null;
+        return null; // если не нашли - возвращаем null
     }
 }

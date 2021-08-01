@@ -19,7 +19,7 @@ class ProfileController extends Controller
                 'rules' => [
                     [
                         'allow' => true,
-                        'roles' => ['@']
+                        'roles' => ['@'] // разрешаем доступ в контроллер только авторизованным, остальных выкидывает на страницу логина
                     ]
                 ]
             ]
@@ -29,27 +29,20 @@ class ProfileController extends Controller
     public $model;
     public function actionIndex()
     {
-        $model = new User();
-        if ($model === null) {
-            throw new NotFoundHttpException;
-        }
-        return $this->render('index', [
-            'model' => $model,
-        ]);
+        return $this->render('index');
     }
 
     public function actionChangeSettings()
     {
-        $user = User::findOne(Yii::$app->user->identity->id);
-        if ($user->load(Yii::$app->request->post()))
+        $user = User::findOne(Yii::$app->user->identity->id); // находим пользователя и кладём в $user
+        if ($user->load(Yii::$app->request->post())) // если в юзера загружаем что-то ПОСТом
         {
-            if ($user->save(false))
+            if ($user->save(false)) // то сохраняем в БД
             {
-                Yii::$app->session->setFlash('successChange', 'Success');
-                return $this->render('index');
+                Yii::$app->session->setFlash('successChange', 'Success'); // задаём флеш-сообщение
+                return $this->render('index'); // и возвращаем главную страницу личного кабинета
             }
         }
-        Yii::$app->session->setFlash('noChange', 'No change');
-        return $this->render('changeSettings', ['model' => $user]);
+        return $this->render('changeSettings', ['model' => $user]); // отрисовываем страницу изменения настроек
     }
 }

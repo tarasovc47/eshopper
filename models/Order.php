@@ -82,25 +82,25 @@ class Order extends \yii\db\ActiveRecord
         return $this->hasOne(User::className(), ['id' => 'user']);
     }
 
-    public function saveOrder($user_id, $session)
+    public function saveOrder($user_id, $session) // функция сохранения заказа принимает user_id и сессию
     {
-        $this->user_id = $user_id;
-        if ($this->user_id == null)
+        $this->user_id = $user_id; // передаем значение user_id Заказа полученное значение user_id
+        if ($this->user_id == null) // если оно == NULL
         {
             Yii::$app->session->setFlash('need_auth', 'Для продолжения необходимо <a href="' . URl::toRoute(['auth/signup']) . '">зарегистрироваться</a> или <a href="' . URl::toRoute(['auth/login']) . '">войти</a> под своей учётной записью');
-            $this->refresh();
+            $this->refresh();// то генерим флеш-сообщение с необходимостью авторизации и обновляем страничку
         }
-        $this->date = new Expression('NOW()');
-        $this->quantity = $session['cart.qty'];
-        $this->sum = $session['cart.cost'];
-        if ($this->save())
+        $this->date = new Expression('NOW()'); // записываем текущее дату-время в date Заказа
+        $this->quantity = $session['cart.qty']; // записываем количество товаров из сессии в количество Заказа
+        $this->sum = $session['cart.cost']; // записываем сумму из сессии в сумму Заказа
+        if ($this->save()) //если всё гуд
         {
-            OrderItem::saveOrderItems($session['cart'], $this->id);
-            Yii::$app->session->setFlash('success', 'Ваш заказ принят, менеджер свяжется с вами в ближайшее время');
-            $session->remove('cart');
+            OrderItem::saveOrderItems($session['cart'], $this->id); // сохраняем товары Заказа и ИД в таблицу OrderItems
+            Yii::$app->session->setFlash('success', 'Ваш заказ принят, менеджер свяжется с вами в ближайшее время'); // делаем флеш-сообщение, об успешном завершении
+            $session->remove('cart'); // чистим корзину и всё что в ней было
             $session->remove('cart.qty');
             $session->remove('cart.cost');
-            return $this->refresh();
+            return $this->refresh(); // обновляем страничку
         }
     }
 }

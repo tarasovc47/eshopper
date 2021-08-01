@@ -42,7 +42,7 @@ use yii\widgets\ActiveForm;
                     <tr>
                         <td><a href="<?= Url::to(['/product/view', 'id' => $id]) ?>"><?= Html::img("@web/uploads/{$item['image']}", ['alt' => $item['title'], 'height' => 100]) ?></a></td>
                         <td><a href="<?= Url::to(['/product/view', 'id' => $id]) ?>"><?= $item['title'] ?></a></td>
-                        <td><?= $item['qty'] ?></td>
+                        <td><a href="#"><i class="fa fa-plus-square"></i></a> <?= $item['qty'] ?> <a href="#"><i class="fa fa-minus-square"></i></a></td>
                         <td><?= $item['cost'] ?></td>
                         <td><span data-id="<?= $id ?>" class="glyphicon glyphicon-remove text-danger del-item" style="cursor: pointer" aria-hidden="true"></td>
                     </tr>

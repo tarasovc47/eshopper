@@ -16,11 +16,6 @@ use app\controllers\ProfileController;
             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             <?= Yii::$app->session->getFlash('successChange'); ?>
         </div>
-    <?php elseif (Yii::$app->session->hasFlash('noChange')): ?>
-        <div class="alert alert-warning alert-dismissable" role="alert">
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <?= Yii::$app->session->getFlash('noChange'); ?>
-        </div>
     <?php endif; ?>
     <h2>Это личный кабинет покупателя</h2>
     <h3>Здесь Вы можете:</h3>

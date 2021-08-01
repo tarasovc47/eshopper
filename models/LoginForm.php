@@ -54,11 +54,11 @@ class LoginForm extends Model
      */
     public function validatePassword($attribute, $params)
     {
-        if (!$this->hasErrors()) {
-            $user = $this->getUser();
+        if (!$this->hasErrors()) { // если в валидации нет ошибок
+            $user = $this->getUser(); // то кладём в переменную Юзер найденного по логину или емайл пользователя
 
-            if (!$user || !$user->validatePassword($this->password) /*|| !$user->validateEmail($this->email)*/) {
-                $this->addError($attribute, 'Неправильный логин/E-Mail или пароль');
+            if (!$user || !$user->validatePassword($this->password)) { // если пользователя нет ИЛИ пароль не прошёл валидацию
+                $this->addError($attribute, 'Неправильный логин/E-Mail или пароль'); // возвращаем ЛОЖЬ
             }
         }
     }
@@ -69,8 +69,8 @@ class LoginForm extends Model
      */
     public function login()
     {
-        if ($this->validate()) {
-            return Yii::$app->user->login($this->getUser(), $this->rememberMe ? 3600*24*30 : 0);
+        if ($this->validate()) { // если валидация пройдена
+            return Yii::$app->user->login($this->getUser(), $this->rememberMe ? 3600*24*30 : 0); // возвращаем залогиненого пользователя
         }
         return false;
     }
@@ -82,9 +82,9 @@ class LoginForm extends Model
      */
     public function getUser()
     {
-        if ($this->_user === false) {
-            $this->_user = User::findIdentityByLoginOrEmail($this->identity);
+        if ($this->_user === false) { //проверяем, что пользователь не залогинен
+            $this->_user = User::findIdentityByLoginOrEmail($this->identity); // кладём в пользователя то что нашли по логину и емайлу
         }
-        return $this->_user;
+        return $this->_user; // или просто возвращаем пользователя
     }
 }

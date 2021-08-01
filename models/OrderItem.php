@@ -76,18 +76,18 @@ class OrderItem extends \yii\db\ActiveRecord
         return $this->hasOne(Product::className(), ['id' => 'product_id']);
     }
 
-    public static function saveOrderItems($items, $order_id)
+    public static function saveOrderItems($items, $order_id) // функция сохранения товаров заказов в отдельной таблице
     {
         foreach ($items as $id => $item)
         {
-            $orderItems = new OrderItem();
-            $orderItems->order_id = $order_id;
+            $orderItems = new OrderItem(); // инициализируем новый экземпляр класса
+            $orderItems->order_id = $order_id; // и передаём ему всё что пришло из заказа
             $orderItems->product_id = $id;
             $orderItems->title = $item['title'];
             $orderItems->product_count = $item['qty'];
             $orderItems->product_price = $item['cost'];
             $orderItems->order_sum = $item['qty'] * $item['cost'];
-            $orderItems->save();
+            $orderItems->save(); // сохраняем
         }
     }
 }

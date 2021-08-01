@@ -20,16 +20,16 @@ class AuthController extends Controller implements IdentityInterface
      */
     public function actionLogin()
     {
-        if (!Yii::$app->user->isGuest) {
+        if (!Yii::$app->user->isGuest) { //если пользователь не гость - возвращаем на главную
             return $this->goHome();
         }
 
-        $model = new LoginForm();
-        if ($model->load(Yii::$app->request->post()) && $model->login()) {
+        $model = new LoginForm(); // создаём экземпляр LoginForm
+        if ($model->load(Yii::$app->request->post()) && $model->login()) { // если модель передана ПОСТом И пользователь авторизован - возвращаем на предыдущую страницу
             return $this->goBack();
         }
 
-        $model->password = '';
+        $model->password = ''; // если пароль в модели пуст - отравляем на авторизацию
         return $this->render('/auth/login', [
             'model' => $model,
         ]);
@@ -41,25 +41,24 @@ class AuthController extends Controller implements IdentityInterface
      */
     public function actionLogout()
     {
-        Yii::$app->user->logout();
-
+        Yii::$app->user->logout(); //если пользователь вышел - возвращаем на главную
         return $this->goHome();
     }
 
     public function actionSignup()
     {
-        $model = new SignupForm();
+        $model = new SignupForm(); // создаём новый экземпляр модели
 
-        if (Yii::$app->request->isPost)
+        if (Yii::$app->request->isPost) // если передано ПОСТом
         {
-            $model->load(Yii::$app->request->post());
-            if ($model->signup())
+            $model->load(Yii::$app->request->post()); //загружаем в модель переданное ПОСТом
+            if ($model->signup()) // и если регистрация прошла успешно - возвращаем на авторизацию
             {
                 return $this->redirect(['auth/login']);
             }
         }
 
-        return $this->render('signup', ['model' => $model]);
+        return $this->render('signup', ['model' => $model]); //возвращаем окно регистрации
     }
 
     /**

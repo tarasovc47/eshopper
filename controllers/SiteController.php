@@ -59,6 +59,20 @@ class SiteController extends Controller
         ];
     }
 
+    public function prepareSidebar()
+    {
+        $brands = Brand::getAll(); //получаем список брендов
+        $products_min = Product::find()->min('cost'); //получаем минимальную и максимальную стоимость
+        $products_max = Product::find()->max('cost');
+        $categories = Category::getAll(); // получаем список категорий
+        return [ // передаём в массив
+            'brands' => $brands,
+            'categories' => $categories,
+            'products_cost_min' => $products_min,
+            'products_cost_max' => $products_max,
+        ];
+    }
+
     /**
      * Displays homepage.
      *
@@ -66,22 +80,19 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        $brands = Brand::getAll();
-        $query = Product::find()->where(['hidden' => '0']);
-        $products_min = Product::find()->min('cost');
-        $products_max = Product::find()->max('cost');
-        $categories = Category::getAll();
-        $pagination = new Pagination(['totalCount' => $query->count(), 'pageSize' => 6]);
-        $products = $query->offset($pagination->offset)
+        $query = Product::find()->where(['hidden' => '0']); // получаем список товаров в наличии
+        $pagination = new Pagination(['totalCount' => $query->count(), 'pageSize' => 6]); // делаем пагинацию, с количеством товаров на странице = 6
+        $products = $query->offset($pagination->offset) // делаем список товаров с учётом пагинации
             ->limit($pagination->limit)
             ->all();
-        return $this->render('index', [
-            'brands' => $brands,
+        $array = $this->prepareSidebar(); // получаем массив для отрисовки боковых панелек
+        return $this->render('index', [ // и передаём всё в главную страницу
             'products' => $products,
-            'products_cost_min' => $products_min,
-            'products_cost_max' => $products_max,
-            'categories' => $categories,
             'pagination' => $pagination,
+            'brands' => $array['brands'],
+            'categories' => $array['categories'],
+            'products_cost_min' => $array['products_cost_min'],
+            'products_cost_max' => $array['products_cost_max'],
         ]);
     }
 
@@ -115,51 +126,41 @@ class SiteController extends Controller
 
     public function actionCategory($id)
     {
-        $brands = Brand::getAll();
-        $query = Product::find()->where(['category_id' => $id]);
-        $pagination = new Pagination(['totalCount' => $query->count(), 'pageSize' => 6]);
-        $products = $query->offset($pagination->offset)
+        $query = Product::find()->where(['category_id' => $id]); // получаем список всех товаров в наличии в данной категории
+        $pagination = new Pagination(['totalCount' => $query->count(), 'pageSize' => 6]); // задаём пагинацию
+        $products = $query->offset($pagination->offset) // составляем список товаров с учётом пагинации
             ->limit($pagination->limit)
             ->all();
-        $products_min = Product::find()->min('cost');
-        $products_max = Product::find()->max('cost');
-        $categories = Category::getAll();
-        $data['products'] = $products;
-        $data['pagination'] = $pagination;
-        $category = Category::findOne($id);
-        return $this->render('../category/view', [
-            'brands' => $brands,
-            'products' => $data['products'],
-            'pagination' => $data['pagination'],
-            'products_cost_min' => $products_min,
-            'products_cost_max' => $products_max,
-            'categories' => $categories,
+        $array = $this->prepareSidebar(); // получаем массив для отрисовки боковых панелек
+        $category = Category::findOne($id); // получаем категорию из $id
+        return $this->render('../category/view', [ // и передаём всё в вид категории
             'category' => $category,
+            'products' => $products,
+            'pagination' => $pagination,
+            'brands' => $array['brands'],
+            'categories' => $array['categories'],
+            'products_cost_min' => $array['products_cost_min'],
+            'products_cost_max' => $array['products_cost_max'],
         ]);
     }
 
     public function actionBrand($id)
     {
-        $brands = Brand::getAll();
-        $query = Product::find()->where(['brand_id' => $id]);
-        $pagination = new Pagination(['totalCount' => $query->count(), 'pageSize' => 6]);
-        $products = $query->offset($pagination->offset)
+        $brand = Brand::findOne($id); // ищем бренд по ИД
+        $query = Product::find()->where(['brand_id' => $id]); // получаем список всех товаров в наличии в данной категории
+        $pagination = new Pagination(['totalCount' => $query->count(), 'pageSize' => 6]); // задаём пагинацию
+        $products = $query->offset($pagination->offset) // составляем список товаров с учётом пагинации
             ->limit($pagination->limit)
             ->all();
-        $products_min = Product::find()->min('cost');
-        $products_max = Product::find()->max('cost');
-        $categories = Category::getAll();
-        $data['products'] = $products;
-        $data['pagination'] = $pagination;
-        $brand = Brand::findOne($id);
-        return $this->render('../brand/view', [
-            'brands' => $brands,
-            'products' => $data['products'],
-            'pagination' => $data['pagination'],
-            'products_cost_min' => $products_min,
-            'products_cost_max' => $products_max,
-            'categories' => $categories,
+        $array = $this->prepareSidebar(); // получаем массив для отрисовки боковых панелек
+        return $this->render('../brand/view', [ // и передаём всё в вид бренда
+            'products' => $products,
             'brand' => $brand,
+            'pagination' => $pagination,
+            'brands' => $array['brands'],
+            'categories' => $array['categories'],
+            'products_cost_min' => $array['products_cost_min'],
+            'products_cost_max' => $array['products_cost_max'],
         ]);
     }
 }

@@ -20,13 +20,11 @@ class ImageUpload extends Model
 
     public function uploadFile(UploadedFile $file, $currentImage)
     {
-        $this->image = $file;
-
-        if ($this->validate())
+        $this->image = $file; // получаем картинку
+        if ($this->validate()) // если она соответствует требованиям
         {
-            $this->deleteCurrentImage($currentImage);
-
-            return $this->saveImage();
+            $this->deleteCurrentImage($currentImage); // удаляем текущую картинку
+            return $this->saveImage(); // и сохраняем новую
         }
     }
 
@@ -40,27 +38,25 @@ class ImageUpload extends Model
         return strtolower(md5(uniqid($this->image->baseName))) . '.' . $this->image->extension;
     }
 
-    public function deleteCurrentImage($currentImage)
+    public function deleteCurrentImage($currentImage) // функция удаления текущей картинки
     {
-        if ($this->fileExists($currentImage))
+        if ($this->fileExists($currentImage))  // если файл существует
         {
-            unlink($this->getFolder() . $currentImage);
+            unlink($this->getFolder() . $currentImage); // удаляем картинку
         }
     }
     public function fileExists($currentImage)
     {
-        if (!empty($currentImage) && $currentImage != null)
+        if (!empty($currentImage) && $currentImage != null) // если "картинка" не пуста И "картинка" не равна NULL
         {
-            return file_exists($this->getFolder() . $currentImage);
+            return file_exists($this->getFolder() . $currentImage); // возвращаем "картинка существует"
         }
     }
 
     public function saveImage()
     {
-        $filename = $this->generateFilename();
-
-        $this->image->saveAs($this->getFolder() . $filename);
-
-        return $filename;
+        $filename = $this->generateFilename(); // получаем сгенерированное имя файла
+        $this->image->saveAs($this->getFolder() . $filename); // сохраняем файл
+        return $filename; // возвращаем имя сохранённого файла
     }
 }
