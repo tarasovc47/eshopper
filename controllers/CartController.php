@@ -26,7 +26,7 @@ class CartController extends Controller
         $session = Yii::$app->session;
         $session->open(); // открываем сессию
         $cart = new Cart(); // инициализируем новый экземпляр класса Корзина
-        $cart->addToCart($product, $qty); // передаём в функцию товар и количество
+        $cart->changeCart($product, $qty); // передаём в функцию товар и количество
         $this->layout = false; // убираем шаблон main из модального окна
         return $this->render('cart-modal', compact('session'));// отрисовываем модальное окно
     }
@@ -64,6 +64,17 @@ class CartController extends Controller
         {
             $order->saveOrder(Yii::$app->user->id, $session);  // то сохраняем его, передав юзер-ид и сессию
         }
-        return $this->render('/cart/view', compact('session', 'order')); // отрисовываем страницу "Корзина"
+        return $this->render('view', compact('session', 'order')); // отрисовываем страницу "Корзина"
+    }
+
+    public function actionChangeQty($id, $change, $currentQty)
+    {
+        $session = Yii::$app->session; // объявляю сессию и открываю её
+        $session->open();
+        $order = new Order(); // новый экземпляр заказа
+        $product = Product::findOne($id); // находим товар по id
+        $cart = new Cart(); // новый экземпляр корзины
+        $cart->changeCart($product, $currentQty, $change); // передаём всё в функцию
+        return $this->goBack('/cart/view' ,compact('session', 'order')); // возвращаем корзину
     }
 }
