@@ -100,6 +100,47 @@ $('.add-to-cart').on('click', function (e) {
     });
 });
 
+$('.addtowish').bind('click', addToWish());
+$('.removewish').bind('click', removeWish());
+
+function addToWish(){
+    $('.addtowish').on('click', function (){
+        let $this = $(this),
+            id = $this.data('id');
+        $.ajax({
+            url: '/profile/add-wish',
+            data: {
+                id: id
+            },
+            type: 'GET',
+            success: function (){
+                $('.addtowish').toggleClass('addtowish removewish');
+                $('.wishlabel' + id).html('<i class="fa fa-plus-square removewish" data-id='+id+'></i> Удалить из желаний');
+                $('.removewish').bind('click', removeWish());
+            },
+        });
+    });
+};
+
+function removeWish() {
+    $('.removewish').on('click', function (){
+        let $this = $(this),
+            id = $this.data('id');
+        $.ajax({
+            url: '/profile/remove-wish',
+            data: {
+                id: id
+            },
+            type: 'GET',
+            success: function (){
+                $('.removewish').toggleClass('addtowish removewish');
+                $('.wishlabel' + id).html('<i class="fa fa-plus-square addtowish" data-id='+id+'></i> Добавить в желания');
+                $('.addtowish').bind('click', addToWish());
+            },
+        });
+    });
+};
+
 /*scroll to top*/
 
 $(document).ready(function () {

@@ -100,6 +100,9 @@ use yii\data\ActiveDataProvider;
             <div class="col-sm-9 padding-right">
                 <div class="features_items">
                     <h2 class="title text-center">Товары в наличии</h2>
+                    <!--<div>
+                        <?php /*var_dump($wishList->find()->where(['user_id' => Yii::$app->user->id])->all());*/?>
+                    </div>-->
                     <?php foreach ($products as $product): ?>
                         <div class="col-sm-4">
                         <div class="product-image-wrapper">
@@ -113,8 +116,13 @@ use yii\data\ActiveDataProvider;
                             </div>
                             <div class="choose">
                                 <ul class="nav nav-pills nav-justified">
-                                    <li><a href="#"><i class="fa fa-plus-square"></i>Add to wishlist</a></li>
-                                    <li><a href="#"><i class="fa fa-plus-square"></i>Add to compare</a></li>
+                                    <?php if ($wishList->find()->where(['user_id' => Yii::$app->user->id])->andWhere(['product_id' => $product->id])->one()): ?>
+                                        <li class="wishlabel<?= $product->id?> removewish" data-id="<?= $product->id ?>"><i class="fa fa-plus-square"></i> Удалить из желаний</li>
+                                        <li><a href="#"><i class="fa fa-plus-square"></i>Add to compare</a></li>
+                                    <?php else: ?>
+                                        <li class="wishlabel<?= $product->id?> addtowish" data-id="<?= $product->id ?>"><i class="fa fa-plus-square"></i> Добавить в желания</li>
+                                        <li><a href="#"><i class="fa fa-plus-square"></i>Add to compare</a></li>
+                                    <?php endif; ?>
                                 </ul>
                             </div>
                         </div>

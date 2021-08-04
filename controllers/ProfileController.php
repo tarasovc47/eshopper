@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use app\models\User;
+use app\models\ViewedProduct;
 use Yii;
 use yii\base\BaseObject;
 use yii\filters\AccessControl;
@@ -44,5 +45,19 @@ class ProfileController extends Controller
             }
         }
         return $this->render('changeSettings', ['model' => $user]); // отрисовываем страницу изменения настроек
+    }
+
+    public function actionAddWish()
+    {
+        $id = Yii::$app->request->get('id');
+        $wish = new ViewedProduct();
+        $wish->addToWish($id, Yii::$app->user->identity->id);
+    }
+
+    public function actionRemoveWish()
+    {
+        $id = Yii::$app->request->get('id');
+        $wish = new ViewedProduct();
+        $wish->removeWish($id, Yii::$app->user->identity->id);
     }
 }

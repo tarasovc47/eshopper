@@ -42,4 +42,26 @@ class ViewedProduct extends \yii\db\ActiveRecord
             'user_id' => 'User ID',
         ];
     }
+
+    public function checkWish($user_id = null)
+    {
+        if ($user_id == null)
+        {
+            return false;
+        }
+        else return ViewedProduct::find()->all();
+    }
+
+    public function addToWish($product_id, $user_id)
+    {
+        $this->user_id = $user_id;
+        $this->product_id = $product_id;
+        $this->save();
+    }
+
+    public function removeWish($product_id, $user_id)
+    {
+        $wish = ViewedProduct::find()->where(['user_id' => $user_id])->andWhere(['product_id' => $product_id])->one();
+        $wish->delete();
+    }
 }
