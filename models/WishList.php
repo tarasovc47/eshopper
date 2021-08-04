@@ -11,14 +11,14 @@ use Yii;
  * @property int|null $product_id
  * @property int|null $user_id
  */
-class ViewedProduct extends \yii\db\ActiveRecord
+class WishList extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
-        return 'viewed_products';
+        return 'wish_list';
     }
 
     /**
@@ -49,7 +49,7 @@ class ViewedProduct extends \yii\db\ActiveRecord
         {
             return false;
         }
-        else return ViewedProduct::find()->all();
+        else return $this::find()->all();
     }
 
     public function addToWish($product_id, $user_id)
@@ -61,7 +61,7 @@ class ViewedProduct extends \yii\db\ActiveRecord
 
     public function removeWish($product_id, $user_id)
     {
-        $wish = ViewedProduct::find()->where(['user_id' => $user_id])->andWhere(['product_id' => $product_id])->one();
+        $wish = $this::find()->where(['user_id' => $user_id])->andWhere(['product_id' => $product_id])->one();
         $wish->delete();
     }
 }

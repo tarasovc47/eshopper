@@ -3,7 +3,7 @@
 namespace app\controllers;
 
 use app\models\User;
-use app\models\ViewedProduct;
+use app\models\WishList;
 use Yii;
 use yii\base\BaseObject;
 use yii\filters\AccessControl;
@@ -50,14 +50,14 @@ class ProfileController extends Controller
     public function actionAddWish()
     {
         $id = Yii::$app->request->get('id');
-        $wish = new ViewedProduct();
+        $wish = new WishList();
         $wish->addToWish($id, Yii::$app->user->identity->id);
     }
 
     public function actionRemoveWish()
     {
         $id = Yii::$app->request->get('id');
-        $wish = new ViewedProduct();
+        $wish = new WishList();
         $wish->removeWish($id, Yii::$app->user->identity->id);
     }
 }

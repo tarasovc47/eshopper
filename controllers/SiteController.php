@@ -6,6 +6,7 @@ use app\models\Brand;
 use app\models\Category;
 use app\models\Product;
 use app\models\ViewedProduct;
+use app\models\WishList;
 use Yii;
 use yii\base\BaseObject;
 use yii\data\Pagination;
@@ -81,7 +82,7 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        $wishList = new ViewedProduct();
+        $wishList = new WishList();
         $wishList->checkWish(Yii::$app->user->identity->id);
         $query = Product::find()->where(['hidden' => '0']); // получаем список товаров в наличии
         $pagination = new Pagination(['totalCount' => $query->count(), 'pageSize' => 6]); // делаем пагинацию, с количеством товаров на странице = 6
